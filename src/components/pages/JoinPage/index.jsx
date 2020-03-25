@@ -63,12 +63,14 @@ class JoinPage extends React.Component {
             <MDBProgress color="orange-color" material value={(this.state.step+1)*100/4} height="20px">
             Schritt {this.state.step + 1} von 4
             </MDBProgress>
-            <div className="text-left">
-              <span className="clickable text-muted" onClick={() => this.setState({step: this.state.step - 1})}>
-              <MDBIcon icon="angle-left" className="mr-2"/>
-              Zurück
-              </span>
-            </div>
+            {this.state.step < 3 &&
+              <div className="text-left">
+                <span className="clickable text-muted" onClick={() => this.setState({step: this.state.step - 1})}>
+                <MDBIcon icon="angle-left" className="mr-2"/>
+                Zurück
+                </span>
+              </div>
+            }
             </>
             }
               <div className="py-4">
