@@ -133,7 +133,7 @@ class JoinPage extends React.Component {
                   {this.state.step === 1 &&
                   <>
                     <MDBCol md="12">
-                      <p className="lead my-3">Wie können wir Sie erreichen?</p>
+                      <p className="lead mb-3">Wie können wir Sie erreichen?</p>
                     </MDBCol>
                     <MDBCol md="6">
                       <input 
@@ -176,7 +176,7 @@ class JoinPage extends React.Component {
                   {this.state.step === 2 &&
                   <>
                     <MDBCol md="12">
-                      <p className="lead mt-3">Betrieb Standort</p>
+                      <p className="lead">Betrieb Standort</p>
                       <small className="mb-3">
                       Wir benötigen diese Information, um Sie zu verifizieren und bei Bedarf das Gutschein2Go 
                       Gutscheinplakat mit Ihrem individuellen Link an Ihrem Betrieb für Sie kostenlos anzubringen.
