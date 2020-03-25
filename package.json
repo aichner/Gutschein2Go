@@ -1,18 +1,19 @@
 {
-  "name": "react-mdb-template",
-  "version": "1.1.1",
+  "name": "gutschein2go",
+  "version": "1.0.2",
   "private": true,
   "license": "(EUPL-1.2)",
   "homepage": ".",
   "dependencies": {
-    "mdbreact": "^4.24.0",
+    "gh-pages": "^2.2.0",
+    "mdbreact": "mdbreact-4.25.3.tgz",
     "node-sass": "^4.13.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.3.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aichner/React-MDB-Template.git"
+    "url": "https://github.com/aichner/Gutschein2Go.git"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,8 +26,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "renamer": "^1.0.0",
-    "rimraf": "^2.6.2",
-    "react": "^16.8.6"
+    "rimraf": "^2.6.2"
   },
   "browserslist": [
     ">0.2%",
