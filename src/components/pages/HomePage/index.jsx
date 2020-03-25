@@ -63,7 +63,7 @@ class HomePage extends React.Component {
             <MDBRow className="flex-center">
               <MDBCol md="6" className="white-text text-center text-md-left mb-5">
                 <h1 className="display-4 font-weight-bold">Verzichten Sie nicht auf Ihre Umsätze!</h1>
-                <h3>Ist ihr Betrieb von der <strong className="orange-text">
+                <h3>Ist Ihr Betrieb von der <strong className="orange-text">
                 Corona Krise</strong> betroffen?</h3>
                 <hr className="hr-light" />
                 <h6 className="mb-4">
