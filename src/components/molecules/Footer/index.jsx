@@ -38,7 +38,7 @@ class Footer extends React.Component{
                     </li>
                   </Link>
                   </MDBCol>
-                  <MDBCol md="2">
+                  <MDBCol md="2" className="my-3">
                     <img src={logoImg} alt="Naturvertrieb Logo" className="img-fluid"/>
                   </MDBCol>
                   <MDBCol md="3" className="text-center">

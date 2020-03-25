@@ -83,7 +83,7 @@ class HomePage extends React.Component {
                   </MDBBtn>
                 </MDBSmoothScroll>
               </MDBCol>
-              <MDBCol md="6" className="mb-4">
+              <MDBCol md="6" className="mb-4 d-none d-sm-block">
                 <MDBCard className="text-center">
                   <MDBCardBody>
                     <h2 className="font-weight-bold">Wie funktioniert es?</h2>
@@ -137,6 +137,9 @@ class HomePage extends React.Component {
           <MDBContainer>
             <h2 className="h1 font-weight-bold my-4 text-center">Wie es funktioniert</h2>
             <MDBRow className="d-flex align-items-center">
+              <MDBCol md="6" className="d-block d-sm-none">
+                <SetupImg />
+              </MDBCol>
               <MDBCol md="6">
                 <p className="lead font-weight-bold">
                 <span>1.</span>Registration und Verifizierung
@@ -151,7 +154,7 @@ class HomePage extends React.Component {
                 <p>Nach der Registration werden Ihre Angaben auf deren Richtigkeit geprüft um einen reibungslosen 
                 Ablauf zu gewährleisten. Wenn wir Sie kontaktiert haben, ist dies bereits geschehen.</p>
               </MDBCol>
-              <MDBCol md="6">
+              <MDBCol md="6" className="d-none d-sm-block">
                 <SetupImg />
               </MDBCol>
               <MDBCol md="6">
@@ -175,6 +178,9 @@ class HomePage extends React.Component {
                 <p>Ein von Ihnen festgelegtes Produkt. Der Gutschein kann gegen ein Produkt oder eine Sammlung von 
                 Produkten eingelöst werden.</p><p><i>(z.B. 1x Wiener Frühstück, 1x Caffee Latte, ...)</i></p>
               </MDBCol>
+              <MDBCol md="6" className="d-block d-sm-none">
+                <DeployImg />
+              </MDBCol>
               <MDBCol md="6">
                 <p className="lead font-weight-bold">
                 <span>3.</span>Veröffentlichung
@@ -188,7 +194,7 @@ class HomePage extends React.Component {
                 <p>Diesen können Sie beliebig auf verschiedenen Plattformen teilen. <strong>Interessenten können über 
                 diesen Link Gutscheine von Ihnen erwerben.</strong></p>
               </MDBCol>
-              <MDBCol md="6">
+              <MDBCol md="6" className="d-none d-sm-block">
                 <DeployImg />
               </MDBCol>
               <MDBCol md="6">
@@ -203,6 +209,9 @@ class HomePage extends React.Component {
                 <p><strong>Übrigens: Wir bieten den Service, die Gutschein-Information kostenlos an Ihrem Betrieb für 
                 Sie anzubringen, um die Ausgangsbeschränkungen zu unterstützen.</strong></p>
               </MDBCol>
+              <MDBCol md="6" className="d-block d-sm-none">
+                <VaultImg />
+              </MDBCol>
               <MDBCol md="6">
                 <p className="lead font-weight-bold">
                 <span>5.</span>Verdienen
@@ -213,7 +222,7 @@ class HomePage extends React.Component {
                 wann dieser ausgezahlt wird.
                 </p>
               </MDBCol>
-              <MDBCol md="6">
+              <MDBCol md="6" className="d-none d-sm-block">
                 <VaultImg />
               </MDBCol>
               <MDBCol md="6">

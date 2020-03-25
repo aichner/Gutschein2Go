@@ -17,6 +17,9 @@ import {
     MDBIcon,
 } from "mdbreact";
 
+//> CSS
+import "./navbar.scss";
+
 // React Logo
 import logoImg from "../../../assets/content/h50.png";
 
@@ -52,9 +55,9 @@ class Navbar extends React.Component{
           <MDBNavbarBrand href="/" className="py-0 font-weight-bold mr-0">
           <img src={logoImg} alt="Gutschien2Go Logo" className="img-fluid"/>
           </MDBNavbarBrand>
-          <MDBNavbarToggler
+          {/*<MDBNavbarToggler
           onClick={this.toggleCollapse("mainNavbarCollapse")}
-          />
+          />*/}
           <MDBCollapse
           id="mainNavbarCollapse"
           isOpen={this.state.collapseID}
