@@ -290,7 +290,7 @@ class JoinPage extends React.Component {
                   ) : (
                     <>
                     <FinishImg />
-                    <h2>Erfolgreich abgesendet!</h2>
+                    <h2>Willkommen, {this.state.firstname}!</h2>
                     <p className="lead">
                     Ihr Antrag wurde an uns übermittelt. Wir setzen uns mit Ihnen schnellstmöglich in Verbindung.
                     </p>
