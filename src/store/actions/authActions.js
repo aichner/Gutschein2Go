@@ -40,32 +40,35 @@ export const signUp = newUser => {
     const firestore = getFirestore();
 
     console.log(newUser);
+    let partner = {
+      first_name: newUser.first_name,
+      last_name: newUser.last_name,
+      email: newUser.email,
+      phone: newUser.phone,
+      company: {
+        location: {
+          address: newUser.company.location.address,
+          city: newUser.company.location.city,
+          state: newUser.company.location.state,
+        },
+        uid: newUser.company.uid,
+        name: newUser.company.name,
+      },
+      verified: false,
+    }
+
+    console.log(partner);
 
     // Create new user to firebase
     firebase
       .auth()
-      .createUserWithEmailAndPassword(newUser.email, newUser.password)
+      .createUserWithEmailAndPassword(newUser.email, process.env.REACT_APP_DEFAULT_STRING)
       .then(response => {
         // Create data for user we just created
         return firestore
-          .collection("users")
+          .collection("partners")
           .doc(response.user.uid)
-          .set({
-            first_name: newUser.first_name,
-            last_name: newUser.last_name,
-            email: newUser.email,
-            phone: newUser.phone,
-            company: {
-              location: {
-                address: newUser.company.address,
-                city: newUser.company.city,
-                state: newUser.company.state,
-              },
-              uid: newUser.company.uid,
-              name: newUser.company.name,
-            },
-            verified: false,
-          });
+          .set(partner);
       })
       .then(() => {
         dispatch({

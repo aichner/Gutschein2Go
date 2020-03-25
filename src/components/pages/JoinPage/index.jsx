@@ -20,6 +20,12 @@ import {
   MDBProgress,
 } from "mdbreact";
 
+//> Redux
+// Connect
+import { connect } from 'react-redux';
+// Actions
+import { signUp } from '../../../store/actions/authActions';
+
 //> CSS
 import "./joinpage.scss";
 
@@ -242,7 +248,22 @@ class JoinPage extends React.Component {
                       )}
                       onClick={() => {
                         if(this.state.address !== "" || this.state.city !== "" || this.state.state !== "") {
-                          this.setState({step: 3})
+                          let newUser = {
+                            first_name: this.state.firstname,
+                            last_name: this.state.lastname,
+                            email: this.state.email,
+                            phone: this.state.phone ? this.state.phone : null,
+                            company: {
+                              location: {
+                                address: this.state.address,
+                                city: this.state.city,
+                                state: this.state.state,
+                              },
+                              uid: this.state.vat ? this.state.vat : null,
+                              name: this.state.company,
+                            },
+                          }
+                          this.setState({step: 3}, () => this.props.signUp(newUser))
                         }
                       }}
                       >
@@ -299,7 +320,22 @@ class JoinPage extends React.Component {
   }
 }
 
-export default JoinPage;
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    authErrorCode: state.auth.authErrorCode,
+    authErrorDetails: state.auth.authErrorDetails,
+    auth: state.firebase.auth
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (newUser) => dispatch(signUp(newUser))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(JoinPage);
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
