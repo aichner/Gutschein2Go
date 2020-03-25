@@ -47,6 +47,10 @@ class JoinPage extends React.Component {
   };
   
   render() {
+    const { authError, auth } = this.props;
+
+    console.log(auth, authError);
+
     return (
       <MDBContainer id="join" className="py-5 my-5 text-center">
       <MDBRow className="flex-center">
@@ -275,6 +279,16 @@ class JoinPage extends React.Component {
                 </MDBRow>
                 {this.state.step === 3 &&
                   <>
+                  {authError ? (
+                    <MDBAlert color="danger">
+                      <p>{authError}</p>
+                      <MDBBtn color="danger" onClick={() => this.setState({step: 1})}>
+                        <MDBIcon icon="angle-left" />
+                        Zurück
+                      </MDBBtn>
+                    </MDBAlert>
+                  ) : (
+                    <>
                     <FinishImg />
                     <h2>Erfolgreich abgesendet!</h2>
                     <p className="lead">
@@ -307,6 +321,8 @@ class JoinPage extends React.Component {
                         Link kopiert
                       </MDBBtn>
                     )}
+                    </>
+                  )}
                   </>
                 }
               </form>
@@ -331,7 +347,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signUp: (newUser) => dispatch(signUp(newUser))
+    signUp: (newUser) => dispatch(signUp(newUser)),
   }
 }
 
