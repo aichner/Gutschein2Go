@@ -23,6 +23,7 @@ import {
   MDBInput,
   MDBBtn,
   MDBFormInline,
+  MDBSmoothScroll,
 } from "mdbreact";
 
 //> Images
@@ -62,21 +63,25 @@ class HomePage extends React.Component {
             <MDBRow className="flex-center">
               <MDBCol md="6" className="white-text text-center text-md-left mb-5">
                 <h1 className="display-4 font-weight-bold">Verzichten Sie nicht auf Ihre Umsätze!</h1>
-                <h3>Ihr Betrieb ist aufgrund der <strong className="orange-text">
-                Corona Krise</strong> beeinträchtigt?</h3>
+                <h3>Ist ihr Betrieb von der <strong className="orange-text">
+                Corona Krise</strong> betroffen?</h3>
                 <hr className="hr-light" />
                 <h6 className="mb-4">
                   Verlieren Sie nicht Ihren Umsatz. Durch unseren unkomplizierter Gutscheinvertrieb Service verkaufen 
                   wir Ihren zukünftigen Kunden Gutscheine für nach der Krise.
                 </h6>
-                <MDBBtn color="white" size="lg">
-                  <MDBIcon icon="angle-down" />
-                  Mehr erfahren
-                </MDBBtn>
-                <MDBBtn color="white" outline size="lg">
-                  <MDBIcon icon="question" />
-                  FAQ
-                </MDBBtn>
+                <MDBSmoothScroll to="service" offset={-150} className="d-inline-block p-0 m-0">
+                  <MDBBtn color="white" size="lg">
+                    <MDBIcon icon="angle-down" />
+                    Mehr erfahren
+                  </MDBBtn>
+                </MDBSmoothScroll>
+                <MDBSmoothScroll to="faq" offset={-150} className="d-inline-block p-0 m-0">
+                  <MDBBtn color="white" outline size="lg">
+                    <MDBIcon icon="question" />
+                    FAQ
+                  </MDBBtn>
+                </MDBSmoothScroll>
               </MDBCol>
               <MDBCol md="6" className="mb-4">
                 <MDBCard className="text-center">
@@ -92,10 +97,12 @@ class HomePage extends React.Component {
                     Betrieben.
                     </p>
                     <h3 className="mt-4 mb-2">Entdecke Sie Ihre Vorteile</h3>
-                    <MDBBtn color="elegant" size="lg">
-                      <MDBIcon icon="angle-down" />
-                      Mehr erfahren
-                    </MDBBtn>
+                    <MDBSmoothScroll to="service" offset={-150} className="d-inline-block p-0 m-0">
+                      <MDBBtn color="elegant" size="lg">
+                        <MDBIcon icon="angle-down" />
+                        Mehr erfahren
+                      </MDBBtn>
+                    </MDBSmoothScroll>
                     <div className="mt-4">
                     <hr />
                       <p className="lead mt-4 mb-1">
