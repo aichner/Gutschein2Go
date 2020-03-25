@@ -92,7 +92,7 @@ class HomePage extends React.Component {
                     </p>
                     <p>
                     Durch die <strong className="orange-text">Corona Krise</strong> haben viele Betriebe geschlossen 
-                    und verlieren daher ihren gesamten Umsatz. Wir bieten inviduelle Lösungen und ermöglichen den 
+                    und verlieren daher ihren gesamten Umsatz. Wir bieten individuelle Lösungen und ermöglichen den 
                     einfachen und unkomplizierten Online-Verkauf von Gutscheinen zur Unterstützung von lokalen 
                     Betrieben.
                     </p>
@@ -125,7 +125,7 @@ class HomePage extends React.Component {
         <MDBContainer className="py-5 mb-5 text-center text-white">
           <h2 className="font-weight-bold">Österreich hält zusammen!</h2>
           <p className="lead">
-          Erwerben Sie jetzt Gutscheine um Ihre lokalen Betriebe zu unterstützen und lösen Sie diese nach der 
+          Erwerben Sie jetzt Gutscheine, um Ihre lokalen Betriebe zu unterstützen und lösen Sie diese nach der 
           Corona-Krise ein.
           </p>
           {/*<MDBBtn color="white" size="lg">
@@ -151,7 +151,7 @@ class HomePage extends React.Component {
                   Partner werden
                 </MDBBtn>
                 </Link>
-                <p>Nach der Registration werden Ihre Angaben auf deren Richtigkeit geprüft um einen reibungslosen 
+                <p>Nach der Registration werden Ihre Angaben auf deren Richtigkeit geprüft, um einen reibungslosen 
                 Ablauf zu gewährleisten. Wenn wir Sie kontaktiert haben, ist dies bereits geschehen.</p>
               </MDBCol>
               <MDBCol md="6" className="d-none d-sm-block">
@@ -165,15 +165,15 @@ class HomePage extends React.Component {
                 <span>2.</span>Erstellung der Gutscheine
                 </p>
                 <p>Wir helfen Ihnen mit der Erstellung der Gutscheine. Sie können hier zwischen <strong>Wertgutscheine
-                </strong> oder <strong>Produktguscheine</strong> wählen.</p>
+                </strong> oder <strong>Produktgutscheine</strong> wählen.</p>
                 <p className="font-weight-bolder mb-1">
                 Wertgutscheine
                 </p>
                 <p>Ein von Ihnen festgelegter Geldbetrag. Eine Barauszahlung ist nicht möglich. Der Gutschein kann als 
-                Bezahlmethode bei Ihnen eingelöst werden. Ist der Zahlbetrag kleiner aus der Wert des Gutscheins, so 
+                Bezahlmethode bei Ihnen eingelöst werden. Ist der Zahlbetrag kleiner als der Wert des Gutscheins, so 
                 verfällt der restliche Gutscheinbetrag und der Gutschein wird entwertet.</p>
                 <p className="font-weight-bolder mb-1">
-                Produktguscheine
+                Produktgutscheine
                 </p>
                 <p>Ein von Ihnen festgelegtes Produkt. Der Gutschein kann gegen ein Produkt oder eine Sammlung von 
                 Produkten eingelöst werden.</p><p><i>(z.B. 1x Wiener Frühstück, 1x Caffee Latte, ...)</i></p>
@@ -185,7 +185,7 @@ class HomePage extends React.Component {
                 <p className="lead font-weight-bold">
                 <span>3.</span>Veröffentlichung
                 </p>
-                <p>Sie erhaltne Ihre persönlichen Gutschein Shop, wo Interessenten über einen Link 
+                <p>Sie erhalten Ihre persönlichen Gutschein Shop, wo Interessenten über einen Link 
                 oder QR-Code Gutscheine erwerben können.</p>
                 <p>
                 Ihr individueller Link sieht wie folgt aus: <br/>
@@ -233,7 +233,7 @@ class HomePage extends React.Component {
                 <span>6.</span>Wiedereröffnen
                 </p>
                 <p>Nach der Corona-Krise können Sie Ihren Betrieb wie gewohnt weiterführen. Alle treuen Kunden, die Sie 
-                während der Krise durch den Kauf von Gutscheinen unterstützt haben können diese nun bei Ihnen einlösen.
+                während der Krise durch den Kauf von Gutscheinen unterstützt haben, können diese nun bei Ihnen einlösen.
                 </p>
               </MDBCol>
             </MDBRow>
@@ -282,7 +282,7 @@ class HomePage extends React.Component {
               <MDBCol md="6">
                 <p className="lead font-weight-bold">Wie erhalten Interessenten Gutscheine?</p>
                 <p>
-                Sie haben die Möglichkeit, an Ihrem Betrieb ein <a>Poster</a> mit Ihrem inviduellen Link und QR Code 
+                Sie haben die Möglichkeit, an Ihrem Betrieb ein <a>Poster</a> mit Ihrem individuellen Link und QR Code 
                 anzubringen oder Ihren individuellen Link selbst auf ausgewählten Plattformen wie Facebook zu 
                 vermarkten.
                 </p>
@@ -315,7 +315,7 @@ class HomePage extends React.Component {
                 <p className="lead font-weight-bold">Ist die Teilnahme kostenlos?</p>
                 <p>
                 Ja. Der Service der Plattform und angebotenen Leistungen werden auf Basis einer Provision von 15% pro 
-                verkauftem Gutschein gedeckt.
+                verkauften Gutschein gedeckt.
                 </p>
               </MDBCol>
               <MDBCol md="6">

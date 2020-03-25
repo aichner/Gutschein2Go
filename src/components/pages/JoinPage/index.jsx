@@ -63,7 +63,7 @@ class JoinPage extends React.Component {
                 <p className="lead mb-4">Erhalten Sie JETZT trotz geschlossenem Betrieb weiterhin Umsätze!</p>
                 <p>
                 Durch die <strong className="orange-text">Corona Krise</strong> haben viele Betriebe geschlossen und 
-                verlieren daher ihren gesamten Umsatz. Wir bieten inviduelle Lösungen und ermöglichen den einfachen und 
+                verlieren daher ihren gesamten Umsatz. Wir bieten individuelle Lösungen und ermöglichen den einfachen und 
                 unkomplizierten Online-Verkauf von Gutscheinen zur Unterstützung von lokalen Betrieben.
                 </p>
               </>
@@ -298,7 +298,7 @@ class JoinPage extends React.Component {
                       <p>Wir bitten Sie, zwecks Verifizierung Ihren Gewerbeschein und eine Kopie eines Ausweises 
                       (Führerschein, Personalausweis, Reisepass, ...) an <a href="mailto:validation@gutschein2go.at">
                       validation@gutschein2go.at
-                      </a> zu senden um einen reibungslosen Ablauf zu gewährleisten.</p>
+                      </a> zu senden, um einen reibungslosen Ablauf zu gewährleisten.</p>
                     </MDBAlert>
                     {!this.state.copied ? (
                       <MDBBtn 
