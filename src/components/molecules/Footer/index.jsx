@@ -2,7 +2,7 @@
 // Contains all the functionality necessary to define React components
 import React from "react";
 // React Router
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
@@ -21,18 +21,36 @@ import "./footer.scss";
 import logoImg from "../../../assets/content/h40_white.png";
 
 class Footer extends React.Component{
+  state = {
+    pathBack: "",
+  }
+
+  componentDidMount = () => {
+    if(this.props.location){
+      let i = 1;
+      let pathBack = "";
+      // Check the number of slashes to fix relative links
+      while(i < (this.props.location.pathname.split("/").length - 1)){
+        pathBack += "../";
+        i++;
+      }
+      this.setState({
+        pathBack,
+      });
+    }
+  }
     render(){
         return(
             <MDBFooter color="elegant-color" className="font-small">
               <MDBContainer className="text-center text-md-left py-3">
                 <MDBRow className="flex-center">
                   <MDBCol md="3" className="text-center">
-                  <Link to="about">
+                  <Link to={this.state.pathBack+"about"}>
                     <li className="list-unstyled">
                       Impressum
                     </li>
                   </Link>
-                  <Link to="privacy">
+                  <Link to={this.state.pathBack+"privacy"}>
                     <li className="list-unstyled">
                       Datenschutzerklärung
                     </li>
@@ -102,7 +120,7 @@ class Footer extends React.Component{
     }
 }
 
-export default Footer;
+export default withRouter(Footer);
 
 /** 
  * SPDX-License-Identifier: (EUPL-1.2)
