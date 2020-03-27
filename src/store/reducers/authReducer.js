@@ -18,6 +18,12 @@ const authReducer = (state = initState, action) => {
         ...state,
         authErrorDetails: null
       };
+    case "LOGIN_ANON_SUCCESS":
+      console.log("Login of anonymous user success");
+      return {
+        ...state,
+        authErrorDetails: null
+      };
     case "SIGNOUT_SUCCESS":
       console.log("Signout success");
       return state;

@@ -3,11 +3,13 @@
 import HomePage from "./HomePage";
 import MessagePage from "./MessagePage";
 import JoinPage from "./JoinPage";
+import ShopPage from "./ShopPage";
 
 export {
     HomePage,
     MessagePage,
     JoinPage,
+    ShopPage,
 };
 
 /** 

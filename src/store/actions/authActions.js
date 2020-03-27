@@ -3,19 +3,38 @@ export const signIn = credentials => {
     const firebase = getFirebase();
 
     firebase
-      .auth()
-      .signInWithEmailAndPassword(credentials.email, credentials.password)
-      .then(() => {
-        dispatch({
-          type: "LOGIN_SUCCESS"
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: "LOGIN_ERROR",
-          err
-        });
+    .auth()
+    .signInWithEmailAndPassword(credentials.email, credentials.password)
+    .then(() => {
+      dispatch({
+        type: "LOGIN_SUCCESS"
       });
+    })
+    .catch(err => {
+      dispatch({
+        type: "LOGIN_ERROR",
+        err
+      });
+    });
+  };
+};
+
+export const signInAnonymous = credentials => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+
+    firebase.auth().signInAnonymously()
+    .then(() => {
+      dispatch({
+        type: "LOGIN_ANON_SUCCESS"
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: "LOGIN_ERROR",
+        err
+      });
+    });
   };
 };
 
@@ -55,6 +74,13 @@ export const signUp = newUser => {
         name: newUser.company.name,
       },
       verified: false,
+      shop: {
+        colors: {
+          primary: "#ff8910",
+          secondary: "#2e2e2e",
+        },
+        name: null
+      }
     }
 
     console.log(partner);
@@ -71,6 +97,9 @@ export const signUp = newUser => {
           .set(partner);
       })
       .then(() => {
+        firebase
+        .auth()
+        .signOut();
         dispatch({
           type: "SIGNUP_SUCCESS"
         });

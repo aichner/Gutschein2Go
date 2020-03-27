@@ -12,6 +12,7 @@ import {
   HomePage,
   MessagePage,
   JoinPage,
+  ShopPage,
 } from "./components/pages";
 
 class Routes extends React.Component {
@@ -37,6 +38,11 @@ class Routes extends React.Component {
         exact
         path='/join'
         render={(props) => <JoinPage {...props}/>}
+        />
+        <Route 
+        exact
+        path='/s/:username'
+        render={(props) => <ShopPage {...props}/>}
         />
         <Route component={HomePage} />
       </Switch>
