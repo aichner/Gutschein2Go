@@ -1,8 +1,6 @@
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
-// Router
-import { withRouter } from "react-router-dom";
 
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
@@ -27,9 +25,7 @@ import logoImg from "../../../assets/content/h50.png";
 
 class Navbar extends React.Component{
   state = {
-      collapseID: "",
-      pathBack: "",
-      pathLoaded: false,
+      collapseID: ""
   };
 
   toggleCollapse = (collapseID) => () =>
@@ -42,24 +38,7 @@ class Navbar extends React.Component{
       this.state.collapseID === collapseID && this.setState({ collapseID: "" });
   };
 
-  componentDidMount = () => {
-    if(this.props.location){
-      let i = 1;
-      let pathBack = "";
-      // Check the number of slashes to fix relative links
-      while(i < (this.props.location.pathname.split("/").length - 1)){
-        pathBack += "../";
-        i++;
-      }
-      this.setState({
-        pathBack,
-      });
-    }
-  }
-
   render(){
-    const { location } = this.props;
-
     const overlay = (
     <div
         id="sidenav-overlay"
@@ -93,7 +72,7 @@ class Navbar extends React.Component{
             <MDBNavItem>
               <MDBNavLink
                 exact
-                to={this.state.pathBack+"join"}
+                to="join"
                 onClick={this.closeCollapse("mainNavbarCollapse")}
               >
                 <MDBBtn size="lg" color="orange">Join</MDBBtn>
@@ -109,7 +88,7 @@ class Navbar extends React.Component{
   }
 }
 
-export default withRouter(Navbar);
+export default Navbar;
 
 /** 
  * SPDX-License-Identifier: (EUPL-1.2)

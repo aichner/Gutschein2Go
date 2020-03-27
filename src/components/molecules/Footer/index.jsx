@@ -2,7 +2,7 @@
 // Contains all the functionality necessary to define React components
 import React from "react";
 // React Router
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
@@ -34,6 +34,7 @@ class Footer extends React.Component{
         pathBack += "../";
         i++;
       }
+      console.log(pathBack);
       this.setState({
         pathBack,
       });
@@ -45,12 +46,12 @@ class Footer extends React.Component{
               <MDBContainer className="text-center text-md-left py-3">
                 <MDBRow className="flex-center">
                   <MDBCol md="3" className="text-center">
-                  <Link to={this.state.pathBack+"about"}>
+                  <Link to="about">
                     <li className="list-unstyled">
                       Impressum
                     </li>
                   </Link>
-                  <Link to={this.state.pathBack+"privacy"}>
+                  <Link to="privacy">
                     <li className="list-unstyled">
                       Datenschutzerklärung
                     </li>
@@ -120,7 +121,7 @@ class Footer extends React.Component{
     }
 }
 
-export default withRouter(Footer);
+export default Footer;
 
 /** 
  * SPDX-License-Identifier: (EUPL-1.2)
