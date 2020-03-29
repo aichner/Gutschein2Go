@@ -61,6 +61,11 @@ class Footer extends React.Component{
                     <img src={logoImg} alt="Naturvertrieb Logo" className="img-fluid"/>
                   </MDBCol>
                   <MDBCol md="3" className="text-center">
+                  <Link to="agb">
+                    <li className="list-unstyled">
+                      AGB
+                    </li>
+                  </Link>
                   <a
                   href="mailto:join@gutschein2go.at"
                   >
