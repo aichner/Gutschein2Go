@@ -60,18 +60,18 @@ export const signUp = newUser => {
 
     console.log(newUser);
     let partner = {
-      first_name: newUser.first_name,
-      last_name: newUser.last_name,
-      email: newUser.email,
-      phone: newUser.phone,
+      first_name: newUser.first_name.trim(),
+      last_name: newUser.last_name.trim(),
+      email: newUser.email.trim(),
+      phone: newUser.phone ? newUser.phone.trim() : null,
       company: {
         location: {
-          address: newUser.company.location.address,
-          city: newUser.company.location.city,
-          state: newUser.company.location.state,
+          address: newUser.company.location.address.trim(),
+          city: newUser.company.location.city.trim(),
+          state: newUser.company.location.state.trim(),
         },
-        uid: newUser.company.uid,
-        name: newUser.company.name,
+        uid: newUser.company.uid ? newUser.company.uid.trim() : null,
+        name: newUser.company.name.trim(),
       },
       verified: false,
       shop: {
