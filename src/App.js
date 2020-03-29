@@ -12,6 +12,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import {
   Footer,
   Navbar,
+  CookieModal,
 } from "./components/molecules";
 import {
   ScrollToTop
@@ -28,6 +29,7 @@ class App extends React.Component {
             <Navbar />
             <main>
               <Routes />
+              <CookieModal />
             </main>
             <Footer />
           </div>
