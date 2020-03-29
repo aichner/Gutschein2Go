@@ -36,6 +36,11 @@ class Routes extends React.Component {
         />
         <Route 
         exact
+        path='/agb'
+        render={(props) => <MessagePage {...props}/>}
+        />
+        <Route 
+        exact
         path='/join'
         render={(props) => <JoinPage {...props}/>}
         />
