@@ -17,6 +17,10 @@ import {
     MDBIcon,
 } from "mdbreact";
 
+//> Redux
+// Connect
+import { connect } from 'react-redux';
+
 //> CSS
 import "./navbar.scss";
 
@@ -48,6 +52,7 @@ class Navbar extends React.Component{
     );
 
     const { collapseID } = this.state;
+    const { auth } = this.props;
     return(
       <div>
         <MDBNavbar color="white" light expand="md" fixed="top" scrolling>
@@ -75,7 +80,13 @@ class Navbar extends React.Component{
                 to="join"
                 onClick={this.closeCollapse("mainNavbarCollapse")}
               >
-                <MDBBtn size="lg" color="orange">Join</MDBBtn>
+                <MDBBtn size="lg" color="orange">
+                {auth.uid ? (
+                  "Mein shop"
+                ) : (
+                  "Join"
+                )}
+                </MDBBtn>
               </MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
@@ -88,7 +99,13 @@ class Navbar extends React.Component{
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  }
+}
+
+export default connect(mapStateToProps)(Navbar);;
 
 /** 
  * SPDX-License-Identifier: (EUPL-1.2)

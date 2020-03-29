@@ -18,6 +18,8 @@ import {
   MDBRow,
   MDBCol,
   MDBProgress,
+  MDBSpinner,
+  MDBAnimation,
 } from "mdbreact";
 
 //> Redux
@@ -25,6 +27,7 @@ import {
 import { connect } from 'react-redux';
 // Actions
 import { signUp } from '../../../store/actions/authActions';
+import { signOut } from '../../../store/actions/authActions';
 
 //> CSS
 import "./joinpage.scss";
@@ -47,17 +50,145 @@ class JoinPage extends React.Component {
   };
   
   render() {
-    const { authError, auth } = this.props;
+    const { authError, auth, profile } = this.props;
 
-    console.log(auth, authError);
+    console.log(auth, profile);
+    console.warn(authError);
 
     return (
       <MDBContainer id="join" className="py-5 my-5 text-center">
       <MDBRow className="flex-center">
         <MDBCol md="8">
-          <MDBCard>
+          <MDBCard className="mt-5">
             <MDBCardBody>
-            {this.state.step === 0 &&
+            {auth.uid ? (
+              <>
+              {profile.email ? (
+                <>
+                  <FinishImg />
+                  <h2 className="h1 font-weight-bold mb-0">Willkommen, {profile.first_name}!</h2>
+                  <p className="lead mb-0">
+                  Hier findest Du den aktuellen Stand Deines Gutschein-Shops.
+                  </p>
+                  <p className="mb-4">Dieser Status 
+                  wird <MDBAnimation type="pulse" infinite className="red-text d-inline-block font-weight-bold">
+                  live
+                  </MDBAnimation> aktualisiert.</p>
+                  <div className="py-2">
+                  {(profile.verified === false && !profile.shop.active) &&
+                    <MDBAlert color="warning">
+                      <p>
+                        <MDBIcon icon="id-card" className="orange-text" size="2x" />
+                      </p>
+                      <p className="lead mb-0 font-weight-bold">Verifizierung ausstehend</p>
+                      <p>Die Verifzierung wird soeben durchgeführt. Das kann bis zu 24 Stunden dauern.</p>
+                    </MDBAlert>
+                  }
+                  {(profile.verified === true && !profile.shop.active) &&
+                    <MDBAlert color="success">
+                      <p>
+                        <MDBIcon icon="award" size="2x" />
+                      </p>
+                      <p className="lead mb-0 font-weight-bold">Verifizierung abgeschlossen</p>
+                      <p>Sie wurden erfolgreich verifiziert</p>
+                    </MDBAlert>
+                  }
+                  {(profile.verified === true && !profile.shop.active) &&
+                    <MDBAlert color="info">
+                      <p>
+                        <MDBIcon icon="ticket-alt" size="2x" />
+                      </p>
+                      <p className="lead mb-0 font-weight-bold">Gutscheine festlegen</p>
+                      <p>Unsere MitarbeiterInnen werden sich diesbezüglich schnellstmögich bei Ihnen melden.</p>
+                    </MDBAlert>
+                  }
+                  {(profile.verified === true && profile.shop.active) &&
+                    <>
+                    <MDBAlert color="success">
+                      <p>
+                        <MDBIcon icon="check-circle" size="2x" />
+                      </p>
+                      <p className="lead mb-0 font-weight-bold">Alles bereit!</p>
+                      <p>Ihr Gutscheinshop steht bereit.</p>
+                    </MDBAlert>
+                    <div className="py-3">
+                      <p className="lead">Ihr Shop steht unter</p>
+                      <h3 className="font-weight-bold orange-text">
+                      <a href={`https://g2g.at/${profile.shop.name}`} target="_blank">www.g2g.at/{profile.shop.name}</a>
+                      </h3>
+                      <p className="lead">bereit!</p>
+                    </div>
+                    {!this.state.copied2 ? (
+                      <MDBBtn 
+                      color={"orange"}
+                      onClick={() => {
+                        this.setState({copied2: true}, () => copy(`https://g2g.at/${profile.shop.name}`))
+                      }}
+                      >
+                        <MDBIcon icon="copy" />
+                        Shop Link kopieren
+                      </MDBBtn>
+                    ) : (
+                      <MDBBtn 
+                      color="success"
+                      disabled
+                      >
+                        <MDBIcon icon="check" />
+                        Link kopiert
+                      </MDBBtn>
+                    )}
+                    {!this.state.copied1 ? (
+                      <MDBBtn 
+                      color={"orange"}
+                      outline
+                      onClick={() => {
+                        this.setState({copied1: true}, () => copy("https://gutschein2go.at/?refer=recommend"))
+                      }}
+                      >
+                        <MDBIcon far icon="copy" />
+                        Weiterempfehlen
+                      </MDBBtn>
+                    ) : (
+                      <MDBBtn 
+                      color="success"
+                      outline
+                      disabled
+                      >
+                        <MDBIcon icon="check" />
+                        Link kopiert
+                      </MDBBtn>
+                    )}
+                    </>
+                  }
+                    <div>
+                      <MDBBtn color="primary" outline onClick={() => this.props.signOut()}>
+                        <MDBIcon icon="buildling" />
+                        Weiteren Betrieb registrieren
+                      </MDBBtn>
+                      <p>
+                      <p className="lead mt-3">Support</p>
+                      <a href="mailto:info@gutschein2go.at">
+                        <MDBBtn color="primary">
+                          <MDBIcon icon="envelope" />
+                          E-Mail Support
+                        </MDBBtn>
+                      </a>
+                      </p>
+                      <p>
+                      oder von 10:00 bis 18:00<br/>+43 660 575 21 12
+                      </p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <MDBSpinner yellow/>
+                </>
+              )}
+              </>
+            ) : (
+              <>
+              {this.state.step === 0 &&
               <>
                 <h2 className="h1 font-weight-bold mb-0">Partner werden</h2>
                 <p className="lead mb-4">Erhalten Sie JETZT trotz geschlossenem Betrieb weiterhin Umsätze!</p>
@@ -288,45 +419,17 @@ class JoinPage extends React.Component {
                       </MDBBtn>
                     </MDBAlert>
                   ) : (
-                    <>
-                    <FinishImg />
-                    <h2>Willkommen, {this.state.firstname}!</h2>
-                    <p className="lead">
-                    Ihr Antrag wurde an uns übermittelt. Wir setzen uns mit Ihnen schnellstmöglich in Verbindung.
-                    </p>
-                    <MDBAlert color="warning" className="py-3 mt-4">
-                      <p>Wir bitten Sie, zwecks Verifizierung Ihren Gewerbeschein und eine Kopie eines Ausweises 
-                      (Führerschein, Personalausweis, Reisepass, ...) an <a href="mailto:validation@gutschein2go.at">
-                      validation@gutschein2go.at
-                      </a> zu senden, um einen reibungslosen Ablauf zu gewährleisten.</p>
-                    </MDBAlert>
-                    {!this.state.copied ? (
-                      <MDBBtn 
-                      color={"orange"}
-                      size="lg"
-                      onClick={() => {
-                        this.setState({copied: true}, () => copy("https://gutschein2go.at/?refer=recommend"))
-                      }}
-                      >
-                        <MDBIcon far icon="copy" />
-                        Weiterempfehlen
-                      </MDBBtn>
-                    ) : (
-                      <MDBBtn 
-                      color="success"
-                      size="lg"
-                      disabled
-                      >
-                        <MDBIcon icon="check" />
-                        Link kopiert
-                      </MDBBtn>
-                    )}
+                    <>                    
+                    <MDBSpinner yellow/>
                     </>
                   )}
                   </>
                 }
               </form>
               </div>
+              </>
+            )
+            }
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
@@ -341,13 +444,15 @@ const mapStateToProps = (state) => {
     authError: state.auth.authError,
     authErrorCode: state.auth.authErrorCode,
     authErrorDetails: state.auth.authErrorDetails,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     signUp: (newUser) => dispatch(signUp(newUser)),
+    signOut: () => dispatch(signOut()),
   }
 }
 

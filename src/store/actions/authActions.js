@@ -75,11 +75,12 @@ export const signUp = newUser => {
       },
       verified: false,
       shop: {
+        active: false,
         colors: {
           primary: "#ff8910",
           secondary: "#2e2e2e",
         },
-        name: null
+        name: ""
       }
     }
 
@@ -97,9 +98,7 @@ export const signUp = newUser => {
           .set(partner);
       })
       .then(() => {
-        firebase
-        .auth()
-        .signOut();
+        //firebase.auth().signOut();
         dispatch({
           type: "SIGNUP_SUCCESS"
         });
