@@ -1,6 +1,8 @@
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
+// Link
+import { Link } from "react-router-dom";
 
 //> Additional
 // Copy to clipboard
@@ -20,6 +22,7 @@ import {
   MDBProgress,
   MDBSpinner,
   MDBAnimation,
+  MDBInput,
 } from "mdbreact";
 
 //> Redux
@@ -47,6 +50,8 @@ class JoinPage extends React.Component {
     city: "",
     state: "",
     vat: "",
+    privacy: false,
+    agb: false,
   };
   
   render() {
@@ -371,6 +376,36 @@ class JoinPage extends React.Component {
                       value={this.state.vat}
                       />
                     </MDBCol>
+                      <div className="mt-1">
+                        <MDBInput
+                          label={<p>Ich habe die <Link to="../privacy">Datenschutzerklärung</Link> gelesen und akzeptiert.</p>}
+                          filled
+                          type="checkbox"
+                          checked={this.state.privacy}
+                          onChange={(e) => {
+                            this.setState({
+                              privacy: e.target.checked
+                            })
+                          }}
+                          id="checkbox1"
+                          containerClass="mr-5"
+                        />
+                      </div>
+                      <div className="my-2">
+                        <MDBInput
+                          label={<p>Ich habe die <Link to="../agb">AGB</Link> gelesen und akzeptiert.</p>}
+                          filled
+                          type="checkbox"
+                          id="checkbox2"
+                          checked={this.state.agb}
+                          onChange={(e) => {
+                            this.setState({
+                              agb: e.target.checked
+                            })
+                          }}
+                          containerClass="mr-5"
+                        />
+                      </div>
                     <MDBCol md="12" className="mt-2">
                       <MDBBtn 
                       color="orange"
@@ -379,10 +414,18 @@ class JoinPage extends React.Component {
                       disabled={(
                         this.state.address === "" ||
                         this.state.city === "" ||
-                        this.state.state === ""
+                        this.state.state === "" ||
+                        !this.state.privacy || 
+                        !this.state.agb
                       )}
                       onClick={() => {
-                        if(this.state.address !== "" || this.state.city !== "" || this.state.state !== "") {
+                        if(
+                          this.state.address !== "" || 
+                          this.state.city !== "" || 
+                          this.state.state !== "" || 
+                          !this.state.privacy || 
+                          !this.state.agb
+                        ) {
                           let newUser = {
                             first_name: this.state.firstname,
                             last_name: this.state.lastname,

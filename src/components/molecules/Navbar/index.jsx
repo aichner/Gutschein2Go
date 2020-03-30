@@ -44,11 +44,11 @@ class Navbar extends React.Component{
 
   render(){
     const overlay = (
-    <div
+      <div
         id="sidenav-overlay"
         style={{ backgroundColor: "transparent" }}
         onClick={this.toggleCollapse("mainNavbarCollapse")}
-    />
+      />
     );
 
     const { collapseID } = this.state;
