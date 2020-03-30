@@ -378,7 +378,9 @@ class JoinPage extends React.Component {
                     </MDBCol>
                       <div className="mt-1">
                         <MDBInput
-                          label={<p>Ich habe die <Link to="../privacy">Datenschutzerklärung</Link> gelesen und akzeptiert.</p>}
+                          label={<p>Ich habe die <Link to="../privacy" target="_blank">
+                          Datenschutzerklärung
+                          </Link> gelesen und akzeptiert.</p>}
                           filled
                           type="checkbox"
                           checked={this.state.privacy}
@@ -393,7 +395,12 @@ class JoinPage extends React.Component {
                       </div>
                       <div className="my-2">
                         <MDBInput
-                          label={<p>Ich habe die <Link to="../agb">AGB</Link> gelesen und akzeptiert.</p>}
+                          label={<p>Ich habe die <Link 
+                          to="../agb"
+                          target="_blank"
+                          >
+                          AGB
+                          </Link> gelesen und akzeptiert.</p>}
                           filled
                           type="checkbox"
                           id="checkbox2"
