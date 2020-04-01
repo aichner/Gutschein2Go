@@ -4,12 +4,16 @@ import HomePage from "./HomePage";
 import MessagePage from "./MessagePage";
 import JoinPage from "./JoinPage";
 import ShopPage from "./ShopPage";
+import ManagePage from "./ManagePage";
+import LoginPage from "./LoginPage";
 
 export {
     HomePage,
     MessagePage,
     JoinPage,
     ShopPage,
+    ManagePage,
+    LoginPage,
 };
 
 /** 

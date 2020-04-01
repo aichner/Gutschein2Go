@@ -1,0 +1,15 @@
+#login {
+  img {
+    max-height: 50;
+    max-width: 100%;
+  }
+  .form-control:focus {
+    border-color: #ff8910;
+    box-shadow: 0 0 0 0.2rem rgba(255, 137, 16, 0.25);
+  }
+}
+
+/** 
+ * SPDX-License-Identifier: (EUPL-1.2)
+ * Copyright © 2019 Christian Aichner
+ */

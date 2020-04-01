@@ -13,6 +13,8 @@ import {
   MessagePage,
   JoinPage,
   ShopPage,
+  ManagePage,
+  LoginPage,
 } from "./components/pages";
 
 class Routes extends React.Component {
@@ -23,6 +25,16 @@ class Routes extends React.Component {
         exact
         path="/"
         render={() => <HomePage />}
+        />
+        <Route 
+        exact
+        path='/manage'
+        render={(props) => <ManagePage {...props}/>}
+        />
+        <Route 
+        exact
+        path='/login'
+        render={(props) => <LoginPage {...props}/>}
         />
         <Route 
         exact

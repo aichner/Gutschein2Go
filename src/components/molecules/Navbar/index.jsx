@@ -1,25 +1,29 @@
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
+// Router
+import { withRouter } from "react-router-dom";
 
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
 import {
-    MDBNavbar,
-    MDBNavbarBrand,
-    MDBNavbarNav,
-    MDBNavbarToggler,
-    MDBCollapse,
-    MDBNavItem,
-    MDBNavLink,
-    MDBContainer,
-    MDBBtn,
-    MDBIcon,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarNav,
+  MDBNavbarToggler,
+  MDBCollapse,
+  MDBNavItem,
+  MDBNavLink,
+  MDBContainer,
+  MDBBtn,
+  MDBIcon
 } from "mdbreact";
 
 //> Redux
 // Connect
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
+// Actions
+import { signOut } from "../../../store/actions/authActions";
 
 //> CSS
 import "./navbar.scss";
@@ -27,22 +31,22 @@ import "./navbar.scss";
 // React Logo
 import logoImg from "../../../assets/content/h50.png";
 
-class Navbar extends React.Component{
+class Navbar extends React.Component {
   state = {
-      collapseID: ""
+    collapseID: ""
   };
 
-  toggleCollapse = (collapseID) => () =>
-      this.setState((prevState) => ({
+  toggleCollapse = collapseID => () =>
+    this.setState(prevState => ({
       collapseID: prevState.collapseID !== collapseID ? collapseID : ""
-      }));
+    }));
 
-  closeCollapse = (collapseID) => () => {
-      window.scrollTo(0, 0);
-      this.state.collapseID === collapseID && this.setState({ collapseID: "" });
+  closeCollapse = collapseID => () => {
+    window.scrollTo(0, 0);
+    this.state.collapseID === collapseID && this.setState({ collapseID: "" });
   };
 
-  render(){
+  render() {
     const overlay = (
       <div
         id="sidenav-overlay"
@@ -52,62 +56,113 @@ class Navbar extends React.Component{
     );
 
     const { collapseID } = this.state;
-    const { auth } = this.props;
-    return(
-      <div>
-        <MDBNavbar color="white" light expand="md" fixed="top" scrolling>
-        <MDBContainer>
-          <MDBNavbarBrand href="/" className="py-0 font-weight-bold mr-0">
-          <img src={logoImg} alt="Gutschien2Go Logo" className="img-fluid"/>
-          </MDBNavbarBrand>
-          {/*<MDBNavbarToggler
-          onClick={this.toggleCollapse("mainNavbarCollapse")}
-          />*/}
-          <MDBCollapse
-          id="mainNavbarCollapse"
-          isOpen={this.state.collapseID}
-          navbar
-          >
-          <MDBNavbarNav right className="flex-center">
-            <MDBNavItem>
-              <a href="mailto:join@gutschein2go.at" className="text-dark">
-                <strong>Kontakt</strong>
-              </a>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink
-                exact
-                to="join"
-                onClick={this.closeCollapse("mainNavbarCollapse")}
+    const { auth, profile, location } = this.props;
+
+    if(location.pathname !== "/manage"){
+      return (
+        <div>
+          <MDBNavbar color="white" light expand="md" fixed="top" scrolling>
+            <MDBContainer>
+              <MDBNavbarBrand href="/" className="py-0 font-weight-bold mr-0">
+                <img
+                  src={logoImg}
+                  alt="Gutschien2Go Logo"
+                  className="img-fluid"
+                />
+              </MDBNavbarBrand>
+              {/*<MDBNavbarToggler
+            onClick={this.toggleCollapse("mainNavbarCollapse")}
+            />*/}
+              <MDBCollapse
+                id="mainNavbarCollapse"
+                isOpen={this.state.collapseID}
+                navbar
               >
-                <MDBBtn size="lg" color="orange">
-                {auth.uid ? (
-                  "Mein shop"
-                ) : (
-                  "Join"
-                )}
-                </MDBBtn>
-              </MDBNavLink>
-            </MDBNavItem>
-          </MDBNavbarNav>
-          </MDBCollapse>
-        </MDBContainer>
-      </MDBNavbar>
-      {collapseID && overlay}
-      </div>
-    );
+                <MDBNavbarNav right className="flex-center">
+                  <MDBNavItem>
+                    <a href="mailto:join@gutschein2go.at" className="text-dark">
+                      <strong>Kontakt</strong>
+                    </a>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    {auth.uid ? (
+                      <>
+                        {profile.admin ? (
+                          <MDBNavLink
+                            exact
+                            to="manage"
+                            onClick={this.closeCollapse("mainNavbarCollapse")}
+                          >
+                            <MDBBtn size="lg" color="orange">
+                              Management
+                            </MDBBtn>
+                          </MDBNavLink>
+                        ) : (
+                          <MDBNavLink
+                            exact
+                            to="join"
+                            onClick={this.closeCollapse("mainNavbarCollapse")}
+                          >
+                            <MDBBtn size="lg" color="orange">
+                              Mein Status
+                            </MDBBtn>
+                          </MDBNavLink>
+                        )}
+                      </>
+                    ) : (
+                      <MDBNavLink
+                        exact
+                        to="join"
+                        onClick={this.closeCollapse("mainNavbarCollapse")}
+                      >
+                        <MDBBtn size="lg" color="orange">
+                          Join
+                        </MDBBtn>
+                      </MDBNavLink>
+                    )}
+                  </MDBNavItem>
+                  {auth.uid && profile.admin && (
+                    <MDBNavItem>
+                      <MDBNavLink
+                        exact
+                        to="manage"
+                        onClick={() => this.props.signOut()}
+                      >
+                        <MDBBtn size="lg" color="elegant" outline>
+                          Sign out
+                        </MDBBtn>
+                      </MDBNavLink>
+                    </MDBNavItem>
+                  )}
+                </MDBNavbarNav>
+              </MDBCollapse>
+            </MDBContainer>
+          </MDBNavbar>
+          {collapseID && overlay}
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
-  }
-}
+    profile: state.firebase.profile
+  };
+};
 
-export default connect(mapStateToProps)(Navbar);;
+const mapDispatchToProps = dispatch => {
+  return {
+    signOut: () => dispatch(signOut())
+  };
+};
 
-/** 
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar));
+
+/**
  * SPDX-License-Identifier: (EUPL-1.2)
  * Copyright © 2019 Werbeagentur Christian Aichner
  */
