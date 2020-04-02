@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 //> Additional
 // Copy to clipboard
 import copy from "copy-to-clipboard";
+// Axios
+import axios from "axios";
 
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
@@ -52,6 +54,65 @@ class JoinPage extends React.Component {
     vat: "",
     privacy: false,
     agb: false
+  };
+
+  initSendMail = () => {
+    // Login to get JWT
+    axios
+      .post("https://gutschein2gogridmail.herokuapp.com/login", {
+        username: process.env.REACT_APP_NODE_USER,
+        password: process.env.REACT_APP_NODE_PASS
+      })
+      .then(
+        response => {
+          if (response.status === 200) {
+            console.log(response);
+            this.sendMail(response.data.token);
+          } else {
+            console.log("Could not send mail.");
+          }
+        },
+        error => {
+          console.log("Could not send mail.");
+        }
+      );
+  };
+
+  sendMail = token => {
+    if (!token) {
+      this.initSendMail();
+    } else {
+      const config = {
+        method: "POST",
+        url: "https://gutschein2gogridmail.herokuapp.com/sendmail",
+        headers: {
+          Authorization: "bearer " + token,
+          "Content-Type": "application/json"
+        },
+        data: JSON.stringify({
+          to: this.state.email ? this.state.email : null,
+          templateData: {
+            name: this.state.firstname ? this.state.firstname : "Partner"
+          },
+          templateId: "d-1f01d3590e1a490ebb8846d40f40c3c7"
+        })
+      };
+
+      axios(config)
+        .then(response => {
+          if (response.status === 200) {
+            console.log(response);
+          } else if (response.status === 401 || response.status === 403) {
+            // Perform login - not authorized
+            this.loginNode();
+          } else {
+            console.log("Could not send mail.", response.status);
+          }
+        })
+        .catch(error => {
+          console.log("Could not send mail.");
+        });
+    }
   };
 
   render() {
@@ -374,22 +435,22 @@ class JoinPage extends React.Component {
                               </MDBBtn>
                               {this.state.call && (
                                 <MDBAlert color="info" className="mt-3">
-                                <strong>
-                                  Sie können uns täglich von 10:00 bis 18:00
-                                  telefonisch unter{" "}
-                                  <strong>+43 660 575 21 12</strong>{" "}
-                                  erreichen.
-                                </strong>
-                                <a 
-                                href="https://outlook.office365.com/owa/calendar/Gutschein2Go1@aichner.cloud/bookings/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                >
-                                  <MDBBtn color="info">
-                                    <MDBIcon icon="calendar" />
-                                    Termin vereinbaren
-                                  </MDBBtn>
-                                </a>
+                                  <strong>
+                                    Sie können uns täglich von 10:00 bis 18:00
+                                    telefonisch unter{" "}
+                                    <strong>+43 660 575 21 12</strong>{" "}
+                                    erreichen.
+                                  </strong>
+                                  <a
+                                    href="https://outlook.office365.com/owa/calendar/Gutschein2Go1@aichner.cloud/bookings/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    <MDBBtn color="info">
+                                      <MDBIcon icon="calendar" />
+                                      Termin vereinbaren
+                                    </MDBBtn>
+                                  </a>
                                 </MDBAlert>
                               )}
                             </>
@@ -608,9 +669,10 @@ class JoinPage extends React.Component {
                                           name: this.state.company
                                         }
                                       };
-                                      this.setState({ step: 3 }, () =>
-                                        this.props.signUp(newUser)
-                                      );
+                                      this.setState({ step: 3 }, () => {
+                                        this.props.signUp(newUser);
+                                        this.sendMail();
+                                      });
                                     }
                                   }}
                                 >
