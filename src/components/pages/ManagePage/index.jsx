@@ -19,6 +19,7 @@ import {
   banUser,
   activateShop,
   closeShop,
+  configVouchers,
 } from "../../../store/actions/shopActions";
 
 //> MDB
@@ -197,6 +198,9 @@ class ProfilePage extends React.Component {
               ) : (
                 <MDBBadge color="warning">Shop inactive</MDBBadge>
               )}
+              {user.shop.configured && (
+                <MDBBadge color="info">Has vouchers</MDBBadge>
+              )}
             </>
           ),
           actions: (
@@ -218,7 +222,18 @@ class ProfilePage extends React.Component {
                   Buchung
                 </MDBBtn>
               )}
-              {!user.shop.active && user.verified && (
+              {user.verified && !user.shop.configured && (
+                <MDBBtn 
+                color="info"
+                className="px-3 m-0 mr-2"
+                size="sm"
+                onClick={() => this.props.configVouchers(user.uid)}
+                >
+                  <MDBIcon icon="check" />
+                  Vouchers configured
+                </MDBBtn>
+              )}
+              {!user.shop.active && user.verified && user.shop.configured && (
                 <MDBBtn 
                 color="green"
                 className="px-3 m-0 mr-2"
@@ -304,8 +319,8 @@ class ProfilePage extends React.Component {
       );
     } else {
       // Check if logged in
-      if (auth.uid === undefined) return <Redirect to="/" />;
-      if (profile && !profile.admin) return <Redirect to="/" />;
+      if (auth.uid === undefined) return <Redirect to="/login" />;
+      if (profile && !profile.admin) return <Redirect to="/login" />;
 
       // Get firebase users
       if (!this.props.users) {
@@ -462,6 +477,7 @@ const mapDispatchToProps = dispatch => {
     banUser: uid => dispatch(banUser(uid)),
     activateShop: uid => dispatch(activateShop(uid)),
     closeShop: uid => dispatch(closeShop(uid)),
+    configVouchers: uid => dispatch(configVouchers(uid)),
   };
 };
 

@@ -105,6 +105,50 @@ export const verifyUser = uid => {
   };
 };
 
+export const configVouchers = uid => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firebase = getFirebase();
+    const firestore = getFirestore();
+
+    firestore
+      .collection("partners")
+      .doc(uid)
+      .set(
+        {
+          shop: {
+            configured: true
+          }
+        },
+        { merge: true }
+      )
+      .then(() => {
+        firestore
+          .collection("partners")
+          .get()
+          .then(querySnapshot => {
+            let users = querySnapshot.docs.map(doc => {
+              let data = doc.data();
+              data.uid = doc.id;
+              return data;
+            });
+            dispatch({
+              type: "GETUSERS_SUCCESS",
+              users
+            });
+          })
+          .catch(err => {
+            dispatch({
+              type: "GETUSERS_ERROR",
+              err
+            });
+          });
+      })
+      .catch(err => {
+        dispatch({ type: "CONFIGVOUCHERS_ERROR", err });
+      });
+  };
+};
+
 export const activateShop = uid => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
