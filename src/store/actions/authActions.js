@@ -19,6 +19,26 @@ export const signIn = credentials => {
   };
 };
 
+export const checkEmail = email => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+
+    return firebase
+    .auth()
+    .fetchSignInMethodsForEmail(email)
+    .then((res) => {
+      if(res.length > 0){
+        return true; 
+      } else {
+        return false;
+      }
+    })
+    .catch((err) => {
+      return false;
+    });
+  };
+};
+
 export const signInAnonymous = credentials => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
@@ -58,7 +78,12 @@ export const signUp = newUser => {
     const firebase = getFirebase();
     const firestore = getFirestore();
 
-    console.log(newUser);
+    // Import sha256 hashing algorithm
+    const sha256 = require("sha256");
+    // Check if the user has entered a password. If not, create a password.
+    const psw = newUser.password ? newUser.password : sha256(Math.random().toString(36));
+
+    // Create partner object
     let partner = {
       first_name: newUser.first_name.trim(),
       last_name: newUser.last_name.trim(),
@@ -89,7 +114,7 @@ export const signUp = newUser => {
     // Create new user to firebase
     firebase
       .auth()
-      .createUserWithEmailAndPassword(newUser.email, process.env.REACT_APP_DEFAULT_STRING)
+      .createUserWithEmailAndPassword(newUser.email, psw)
       .then(response => {
         // Create data for user we just created
         return firestore

@@ -58,7 +58,7 @@ class Navbar extends React.Component {
     const { collapseID } = this.state;
     const { auth, profile, location } = this.props;
 
-    if(location.pathname !== "/manage"){
+    if(location && location.pathname !== "/manage"){
       return (
         <div>
           <MDBNavbar color="white" light expand="md" fixed="top" scrolling>
@@ -91,7 +91,6 @@ class Navbar extends React.Component {
                           <MDBNavLink
                             exact
                             to="manage"
-                            onClick={this.closeCollapse("mainNavbarCollapse")}
                           >
                             <MDBBtn size="lg" color="orange">
                               Management
@@ -101,7 +100,6 @@ class Navbar extends React.Component {
                           <MDBNavLink
                             exact
                             to="join"
-                            onClick={this.closeCollapse("mainNavbarCollapse")}
                           >
                             <MDBBtn size="lg" color="orange">
                               Mein Status
@@ -113,7 +111,6 @@ class Navbar extends React.Component {
                       <MDBNavLink
                         exact
                         to="join"
-                        onClick={this.closeCollapse("mainNavbarCollapse")}
                       >
                         <MDBBtn size="lg" color="orange">
                           Join
@@ -121,15 +118,27 @@ class Navbar extends React.Component {
                       </MDBNavLink>
                     )}
                   </MDBNavItem>
-                  {auth.uid && profile.admin && (
+                  {auth.uid && (
                     <MDBNavItem>
                       <MDBNavLink
                         exact
-                        to="manage"
+                        to=""
                         onClick={() => this.props.signOut()}
                       >
-                        <MDBBtn size="lg" color="elegant" outline>
-                          Sign out
+                        <MDBBtn size="lg" outline color="elegant">
+                          Logout
+                        </MDBBtn>
+                      </MDBNavLink>
+                    </MDBNavItem>
+                  )}
+                  {!auth.uid && (
+                    <MDBNavItem>
+                      <MDBNavLink
+                        exact
+                        to="login"
+                      >
+                        <MDBBtn size="lg" outline color="elegant">
+                          Login
                         </MDBBtn>
                       </MDBNavLink>
                     </MDBNavItem>

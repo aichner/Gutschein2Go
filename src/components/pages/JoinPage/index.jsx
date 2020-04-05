@@ -31,8 +31,11 @@ import {
 // Connect
 import { connect } from "react-redux";
 // Actions
-import { signUp } from "../../../store/actions/authActions";
-import { signOut } from "../../../store/actions/authActions";
+import { 
+  signUp,
+  signOut,
+  checkEmail,
+} from "../../../store/actions/authActions";
 
 //> CSS
 import "./joinpage.scss";
@@ -49,12 +52,35 @@ class JoinPage extends React.Component {
     email: "",
     phone: "",
     address: "",
+    password: "",
+    password1: "",
     city: "",
     state: "",
     vat: "",
     privacy: false,
     agb: false
   };
+
+  checkEmail = async (e) => {
+    e.preventDefault();
+    let rtn = await this.props.checkEmail(this.state.email.trim());
+    // If the email does not yet exist
+    if(!rtn){
+      this.setState({ step: 2, emailError: false });
+    } else {
+      this.setState({ emailError: true });
+    }
+  }
+  
+  checkPassword = (e) => {
+    e.preventDefault();
+    // Check if passwords match
+    if(this.state.password === this.state.password1){
+      this.setState({ passwordError: false, step: 3 });
+    } else {
+      this.setState({ passwordError: true, step: 2 });
+    }
+  }
 
   initSendMail = () => {
     // Login to get JWT
@@ -66,7 +92,6 @@ class JoinPage extends React.Component {
       .then(
         response => {
           if (response.status === 200) {
-            console.log(response);
             this.sendMail(response.data.token);
           } else {
             console.log("Could not send mail.");
@@ -101,7 +126,6 @@ class JoinPage extends React.Component {
       axios(config)
         .then(response => {
           if (response.status === 200) {
-            console.log(response);
           } else if (response.status === 401 || response.status === 403) {
             // Perform login - not authorized
             this.loginNode();
@@ -118,8 +142,7 @@ class JoinPage extends React.Component {
   render() {
     const { authError, auth, profile } = this.props;
 
-    console.log(auth, profile);
-    console.warn(authError);
+    console.log(authError, auth, profile);
 
     return (
       <MDBContainer id="join" className="py-5 my-5 text-center">
@@ -129,162 +152,174 @@ class JoinPage extends React.Component {
               <MDBCardBody>
                 {auth.uid ? (
                   <>
-                    {profile.email ? (
+                    {profile.isLoaded ? (
                       <>
-                        <FinishImg />
-                        <h2 className="h1 font-weight-bold mb-0">
-                          Willkommen, {profile.first_name}!
-                        </h2>
-                        <p className="lead mb-0">
-                          Hier findest Du den aktuellen Stand Deines
-                          Gutschein-Shops.
-                        </p>
-                        <p className="mb-4">
-                          Dieser Status wird{" "}
-                          <MDBAnimation
-                            type="pulse"
-                            infinite
-                            className="red-text d-inline-block font-weight-bold"
-                          >
-                            live
-                          </MDBAnimation>{" "}
-                          aktualisiert.
-                        </p>
-                        <div className="py-2">
-                          {profile.verified === false && !profile.shop.active && (
-                            <MDBAlert color="warning">
-                              <p>
-                                <MDBIcon
-                                  icon="id-card"
-                                  className="orange-text"
-                                  size="2x"
-                                />
-                              </p>
-                              <p className="lead mb-0 font-weight-bold">
-                                Verifizierung ausstehend
-                              </p>
-                              <p>
-                                Die Verifzierung wird soeben durchgeführt. Das
-                                kann bis zu 24 Stunden dauern.
-                              </p>
-                            </MDBAlert>
-                          )}
-                          {profile.verified === true && !profile.shop.active && (
-                            <MDBAlert color="success">
-                              <p>
-                                <MDBIcon icon="award" size="2x" />
-                              </p>
-                              <p className="lead mb-0 font-weight-bold">
-                                Verifizierung abgeschlossen
-                              </p>
-                              <p>Sie wurden erfolgreich verifiziert</p>
-                            </MDBAlert>
-                          )}
-                          {profile.verified === true && !profile.shop.active && (
-                            <MDBAlert color="info">
-                              <p>
-                                <MDBIcon icon="ticket-alt" size="2x" />
-                              </p>
-                              <p className="lead mb-0 font-weight-bold">
-                                Gutscheine festlegen
-                              </p>
-                              <p>
-                                Unsere MitarbeiterInnen werden sich
-                                diesbezüglich schnellstmögich bei Ihnen melden.
-                              </p>
-                            </MDBAlert>
-                          )}
-                          {profile.verified === true && profile.shop.active && (
-                            <>
-                              <MDBAlert color="success">
-                                <p>
-                                  <MDBIcon icon="check-circle" size="2x" />
-                                </p>
-                                <p className="lead mb-0 font-weight-bold">
-                                  Alles bereit!
-                                </p>
-                                <p>Ihr Gutscheinshop steht bereit.</p>
-                              </MDBAlert>
-                              <div className="py-3">
-                                <p className="lead">Ihr Shop steht unter</p>
-                                <h3 className="font-weight-bold orange-text">
-                                  <a
-                                    href={`https://g2g.at/${profile.shop.name}`}
-                                    target="_blank"
-                                  >
-                                    www.g2g.at/{profile.shop.name}
-                                  </a>
-                                </h3>
-                                <p className="lead">bereit!</p>
-                              </div>
-                              {!this.state.copied2 ? (
-                                <MDBBtn
-                                  color={"orange"}
-                                  onClick={() => {
-                                    this.setState({ copied2: true }, () =>
-                                      copy(
-                                        `https://g2g.at/${profile.shop.name}`
-                                      )
-                                    );
-                                  }}
-                                >
-                                  <MDBIcon icon="copy" />
-                                  Shop Link kopieren
-                                </MDBBtn>
-                              ) : (
-                                <MDBBtn color="success" disabled>
-                                  <MDBIcon icon="check" />
-                                  Link kopiert
-                                </MDBBtn>
-                              )}
-                              {!this.state.copied1 ? (
-                                <MDBBtn
-                                  color={"orange"}
-                                  outline
-                                  onClick={() => {
-                                    this.setState({ copied1: true }, () =>
-                                      copy(
-                                        "https://gutschein2go.at/?refer=recommend"
-                                      )
-                                    );
-                                  }}
-                                >
-                                  <MDBIcon far icon="copy" />
-                                  Weiterempfehlen
-                                </MDBBtn>
-                              ) : (
-                                <MDBBtn color="success" outline disabled>
-                                  <MDBIcon icon="check" />
-                                  Link kopiert
-                                </MDBBtn>
-                              )}
-                            </>
-                          )}
-                          <div>
-                            <MDBBtn
-                              color="primary"
-                              outline
-                              onClick={() => this.props.signOut()}
-                            >
-                              <MDBIcon icon="buildling" />
-                              Weiteren Betrieb registrieren
+                        {profile.isEmpty ? (
+                          <>
+                            <MDBIcon icon="times" className="text-danger" size="3x" />
+                            <p className="font-weight-bold lead mb-3">User Daten können nicht geladen werden.</p>
+                            <MDBBtn color="elegant" onClick={() => this.props.signOut()}>
+                              Ausloggen
                             </MDBBtn>
-                            <p>
-                              <p className="lead mt-3">Support</p>
-                              <a href="mailto:info@gutschein2go.at">
-                                <MDBBtn color="primary">
-                                  <MDBIcon icon="envelope" />
-                                  E-Mail Support
+                          </>
+                        ) : (
+                          <>
+                            <FinishImg />
+                            <h2 className="h1 font-weight-bold mb-0">
+                              Willkommen, {profile.first_name}!
+                            </h2>
+                            <p className="lead mb-0">
+                              Hier findest Du den aktuellen Stand Deines
+                              Gutschein-Shops.
+                            </p>
+                            <p className="mb-4">
+                              Dieser Status wird{" "}
+                              <MDBAnimation
+                                type="pulse"
+                                infinite
+                                className="red-text d-inline-block font-weight-bold"
+                              >
+                                live
+                              </MDBAnimation>{" "}
+                              aktualisiert.
+                            </p>
+                            <div className="py-2">
+                              {profile.verified === false && !profile.shop.active && (
+                                <MDBAlert color="warning">
+                                  <p>
+                                    <MDBIcon
+                                      icon="id-card"
+                                      className="orange-text"
+                                      size="2x"
+                                    />
+                                  </p>
+                                  <p className="lead mb-0 font-weight-bold">
+                                    Verifizierung ausstehend
+                                  </p>
+                                  <p>
+                                    Die Verifzierung wird soeben durchgeführt. Das
+                                    kann bis zu 24 Stunden dauern.
+                                  </p>
+                                </MDBAlert>
+                              )}
+                              {profile.verified === true && !profile.shop.active && (
+                                <MDBAlert color="success">
+                                  <p>
+                                    <MDBIcon icon="award" size="2x" />
+                                  </p>
+                                  <p className="lead mb-0 font-weight-bold">
+                                    Verifizierung abgeschlossen
+                                  </p>
+                                  <p>Sie wurden erfolgreich verifiziert</p>
+                                </MDBAlert>
+                              )}
+                              {profile.verified === true && !profile.shop.active && (
+                                <MDBAlert color="info">
+                                  <p>
+                                    <MDBIcon icon="ticket-alt" size="2x" />
+                                  </p>
+                                  <p className="lead mb-0 font-weight-bold">
+                                    Gutscheine festlegen
+                                  </p>
+                                  <p>
+                                    Unsere MitarbeiterInnen werden sich
+                                    diesbezüglich schnellstmögich bei Ihnen melden.
+                                  </p>
+                                </MDBAlert>
+                              )}
+                              {profile.verified === true && profile.shop.active && (
+                                <>
+                                  <MDBAlert color="success">
+                                    <p>
+                                      <MDBIcon icon="check-circle" size="2x" />
+                                    </p>
+                                    <p className="lead mb-0 font-weight-bold">
+                                      Alles bereit!
+                                    </p>
+                                    <p>Ihr Gutscheinshop steht bereit.</p>
+                                  </MDBAlert>
+                                  <div className="py-3">
+                                    <p className="lead">Ihr Shop steht unter</p>
+                                    <h3 className="font-weight-bold orange-text">
+                                      <a
+                                        href={`https://g2g.at/${profile.shop.name}`}
+                                        target="_blank"
+                                      >
+                                        www.g2g.at/{profile.shop.name}
+                                      </a>
+                                    </h3>
+                                    <p className="lead">bereit!</p>
+                                  </div>
+                                  {!this.state.copied2 ? (
+                                    <MDBBtn
+                                      color={"orange"}
+                                      onClick={() => {
+                                        this.setState({ copied2: true }, () =>
+                                          copy(
+                                            `https://g2g.at/${profile.shop.name}`
+                                          )
+                                        );
+                                      }}
+                                    >
+                                      <MDBIcon icon="copy" />
+                                      Shop Link kopieren
+                                    </MDBBtn>
+                                  ) : (
+                                    <MDBBtn color="success" disabled>
+                                      <MDBIcon icon="check" />
+                                      Link kopiert
+                                    </MDBBtn>
+                                  )}
+                                  {!this.state.copied1 ? (
+                                    <MDBBtn
+                                      color={"orange"}
+                                      outline
+                                      onClick={() => {
+                                        this.setState({ copied1: true }, () =>
+                                          copy(
+                                            "https://gutschein2go.at/?refer=recommend"
+                                          )
+                                        );
+                                      }}
+                                    >
+                                      <MDBIcon far icon="copy" />
+                                      Weiterempfehlen
+                                    </MDBBtn>
+                                  ) : (
+                                    <MDBBtn color="success" outline disabled>
+                                      <MDBIcon icon="check" />
+                                      Link kopiert
+                                    </MDBBtn>
+                                  )}
+                                </>
+                              )}
+                              <div>
+                                <MDBBtn
+                                  color="primary"
+                                  outline
+                                  onClick={() => this.props.signOut()}
+                                >
+                                  <MDBIcon icon="buildling" />
+                                  Weiteren Betrieb registrieren
                                 </MDBBtn>
-                              </a>
-                            </p>
-                            <p>
-                              oder von 10:00 bis 18:00
-                              <br />
-                              +43 660 575 21 12
-                            </p>
-                          </div>
-                        </div>
+                                <p>
+                                  <p className="lead mt-3">Support</p>
+                                  <a href="mailto:info@gutschein2go.at">
+                                    <MDBBtn color="primary">
+                                      <MDBIcon icon="envelope" />
+                                      E-Mail Support
+                                    </MDBBtn>
+                                  </a>
+                                </p>
+                                <p>
+                                  oder von 10:00 bis 18:00
+                                  <br />
+                                  +43 660 575 21 12
+                                </p>
+                              </div>
+                            </div>
+                          </>
+                        )}
                       </>
                     ) : (
                       <>
@@ -314,7 +349,7 @@ class JoinPage extends React.Component {
                         </p>
                       </>
                     )}
-                    {this.state.step > 0 && (
+                    {this.state.step > 0 &&this.state.step < 4 && (
                       <>
                         <MDBProgress
                           color="orange-color"
@@ -324,7 +359,7 @@ class JoinPage extends React.Component {
                         >
                           Schritt {this.state.step + 1} von 4
                         </MDBProgress>
-                        {this.state.step < 3 && (
+                        {this.state.step < 4 && (
                           <div className="text-left">
                             <span
                               className="clickable text-muted"
@@ -350,9 +385,9 @@ class JoinPage extends React.Component {
                                   name="company"
                                   className="form-control"
                                   placeholder="Firmenname"
-                                  onChange={e =>
+                                  onChange={(e) =>
                                     this.setState({
-                                      [e.target.name]: e.target.value
+                                      [e.target.name]: e.target.value,
                                     })
                                   }
                                   value={this.state.company}
@@ -365,9 +400,9 @@ class JoinPage extends React.Component {
                                   name="firstname"
                                   className="form-control"
                                   placeholder="Vorname"
-                                  onChange={e =>
+                                  onChange={(e) =>
                                     this.setState({
-                                      [e.target.name]: e.target.value
+                                      [e.target.name]: e.target.value,
                                     })
                                   }
                                   value={this.state.firstname}
@@ -380,9 +415,9 @@ class JoinPage extends React.Component {
                                   name="lastname"
                                   className="form-control"
                                   placeholder="Nachname"
-                                  onChange={e =>
+                                  onChange={(e) =>
                                     this.setState({
-                                      [e.target.name]: e.target.value
+                                      [e.target.name]: e.target.value,
                                     })
                                   }
                                   value={this.state.lastname}
@@ -466,16 +501,27 @@ class JoinPage extends React.Component {
                                 <input
                                   type="text"
                                   name="email"
-                                  className="form-control"
+                                  className={
+                                    this.state.emailError
+                                      ? "form-control error mb-0"
+                                      : "form-control"
+                                  }
                                   placeholder="E-Mail"
-                                  onChange={e =>
+                                  onChange={(e) =>
                                     this.setState({
-                                      [e.target.name]: e.target.value
+                                      [e.target.name]: e.target.value,
                                     })
                                   }
                                   value={this.state.email}
                                   required
                                 />
+                                {this.state.emailError && (
+                                  <div className="text-left">
+                                    <small className="text-danger">
+                                      Diese E-Mail ist bereits registriert.
+                                    </small>
+                                  </div>
+                                )}
                               </MDBCol>
                               <MDBCol md="6">
                                 <input
@@ -483,9 +529,9 @@ class JoinPage extends React.Component {
                                   name="phone"
                                   className="form-control"
                                   placeholder="Telefon (Optional)"
-                                  onChange={e =>
+                                  onChange={(e) =>
                                     this.setState({
-                                      [e.target.name]: e.target.value
+                                      [e.target.name]: e.target.value,
                                     })
                                   }
                                   value={this.state.phone}
@@ -497,11 +543,7 @@ class JoinPage extends React.Component {
                                   size="lg"
                                   type="submit"
                                   disabled={this.state.email === ""}
-                                  onClick={() => {
-                                    if (this.state.email !== "") {
-                                      this.setState({ step: 2 });
-                                    }
-                                  }}
+                                  onClick={this.checkEmail}
                                 >
                                   Weiter
                                 </MDBBtn>
@@ -509,6 +551,88 @@ class JoinPage extends React.Component {
                             </>
                           )}
                           {this.state.step === 2 && (
+                            <>
+                              <MDBCol md="12">
+                                <p className="lead mb-0">
+                                  Wählen Sie ein Kennwort
+                                </p>
+                                <p className="mb-3 text-muted">
+                                  So können Sie den Status Ihres Shops jederzeit abrufen.
+                                </p>
+                              </MDBCol>
+                              <MDBCol md="6">
+                                <input
+                                  type="password"
+                                  name="password"
+                                  className="form-control"
+                                  placeholder="Passwort"
+                                  onChange={(e) =>
+                                    this.setState({
+                                      [e.target.name]: e.target.value,
+                                    })
+                                  }
+                                  value={this.state.password}
+                                  required
+                                />
+                              </MDBCol>
+                              <MDBCol md="6">
+                                <input
+                                  type="password"
+                                  name="password1"
+                                  className={
+                                    this.state.passwordError
+                                      ? "form-control error mb-0"
+                                      : "form-control"
+                                  }
+                                  placeholder="Passwort wiederholen"
+                                  onChange={(e) =>
+                                    this.setState({
+                                      [e.target.name]: e.target.value,
+                                    })
+                                  }
+                                  value={this.state.password1}
+                                  required
+                                />
+                                {this.state.passwordError && (
+                                  <div className="text-left">
+                                    <small className="text-danger">
+                                      Die beiden Passwörter stimmen nicht
+                                      überein.
+                                    </small>
+                                  </div>
+                                )}
+                              </MDBCol>
+                              <MDBCol md="12" className="mt-2">
+                                <MDBBtn
+                                  color="orange"
+                                  size="lg"
+                                  outline
+                                  type="submit"
+                                  onClick={() => {
+                                    this.setState({
+                                      password: undefined,
+                                      step: 3,
+                                    })
+                                  }}
+                                >
+                                  Überspringen
+                                </MDBBtn>
+                                <MDBBtn
+                                  color="orange"
+                                  size="lg"
+                                  type="submit"
+                                  disabled={
+                                    this.state.password === "" ||
+                                    this.state.password1 === ""
+                                  }
+                                  onClick={this.checkPassword}
+                                >
+                                  Weiter
+                                </MDBBtn>
+                              </MDBCol>
+                            </>
+                          )}
+                          {this.state.step === 3 && (
                             <>
                               <MDBCol md="12">
                                 <p className="lead">Betrieb Standort</p>
@@ -526,9 +650,9 @@ class JoinPage extends React.Component {
                                   name="address"
                                   className="form-control"
                                   placeholder="Adresse"
-                                  onChange={e =>
+                                  onChange={(e) =>
                                     this.setState({
-                                      [e.target.name]: e.target.value
+                                      [e.target.name]: e.target.value,
                                     })
                                   }
                                   value={this.state.address}
@@ -541,9 +665,9 @@ class JoinPage extends React.Component {
                                   name="city"
                                   className="form-control"
                                   placeholder="Stadt"
-                                  onChange={e =>
+                                  onChange={(e) =>
                                     this.setState({
-                                      [e.target.name]: e.target.value
+                                      [e.target.name]: e.target.value,
                                     })
                                   }
                                   value={this.state.city}
@@ -556,9 +680,9 @@ class JoinPage extends React.Component {
                                   name="state"
                                   className="form-control"
                                   placeholder="Bundesland"
-                                  onChange={e =>
+                                  onChange={(e) =>
                                     this.setState({
-                                      [e.target.name]: e.target.value
+                                      [e.target.name]: e.target.value,
                                     })
                                   }
                                   value={this.state.state}
@@ -576,9 +700,9 @@ class JoinPage extends React.Component {
                                   name="vat"
                                   className="form-control"
                                   placeholder="UID-Nummer (optional)"
-                                  onChange={e =>
+                                  onChange={(e) =>
                                     this.setState({
-                                      [e.target.name]: e.target.value
+                                      [e.target.name]: e.target.value,
                                     })
                                   }
                                   value={this.state.vat}
@@ -598,9 +722,9 @@ class JoinPage extends React.Component {
                                   filled
                                   type="checkbox"
                                   checked={this.state.privacy}
-                                  onChange={e => {
+                                  onChange={(e) => {
                                     this.setState({
-                                      privacy: e.target.checked
+                                      privacy: e.target.checked,
                                     });
                                   }}
                                   id="checkbox1"
@@ -622,9 +746,9 @@ class JoinPage extends React.Component {
                                   type="checkbox"
                                   id="checkbox2"
                                   checked={this.state.agb}
-                                  onChange={e => {
+                                  onChange={(e) => {
                                     this.setState({
-                                      agb: e.target.checked
+                                      agb: e.target.checked,
                                     });
                                   }}
                                   containerClass="mr-5"
@@ -642,7 +766,8 @@ class JoinPage extends React.Component {
                                     !this.state.privacy ||
                                     !this.state.agb
                                   }
-                                  onClick={() => {
+                                  onClick={(e) => {
+                                    e.preventDefault();
                                     if (
                                       this.state.address !== "" ||
                                       this.state.city !== "" ||
@@ -661,15 +786,16 @@ class JoinPage extends React.Component {
                                           location: {
                                             address: this.state.address,
                                             city: this.state.city,
-                                            state: this.state.state
+                                            state: this.state.state,
                                           },
                                           uid: this.state.vat
                                             ? this.state.vat
                                             : null,
-                                          name: this.state.company
-                                        }
+                                          name: this.state.company,
+                                        },
+                                        password: this.state.password,
                                       };
-                                      this.setState({ step: 3 }, () => {
+                                      this.setState({ step: 4 }, () => {
                                         this.props.signUp(newUser);
                                         this.sendMail();
                                       });
@@ -682,7 +808,7 @@ class JoinPage extends React.Component {
                             </>
                           )}
                         </MDBRow>
-                        {this.state.step === 3 && (
+                        {this.state.step === 4 && (
                           <>
                             {authError ? (
                               <MDBAlert color="danger">
@@ -728,7 +854,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     signUp: newUser => dispatch(signUp(newUser)),
-    signOut: () => dispatch(signOut())
+    signOut: () => dispatch(signOut()),
+    checkEmail: email => dispatch(checkEmail(email)),
   };
 };
 

@@ -310,6 +310,8 @@ class ProfilePage extends React.Component {
   render() {
     const { auth, profile, users } = this.props;
 
+    console.log(auth, profile);
+
     // Check if firebase has loaded profile data
     if(!profile.isLoaded){
       return (
@@ -320,7 +322,7 @@ class ProfilePage extends React.Component {
     } else {
       // Check if logged in
       if (auth.uid === undefined) return <Redirect to="/login" />;
-      if (profile && !profile.admin) return <Redirect to="/login" />;
+      if (profile && !profile.admin) return <Redirect to="/join" />;
 
       // Get firebase users
       if (!this.props.users) {
