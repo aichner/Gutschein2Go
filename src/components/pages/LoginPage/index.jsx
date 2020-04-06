@@ -34,7 +34,8 @@ import IMGlogo from "../../../assets/content/partners.jpg";
 class LoginPage extends React.Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    loading: false,
   };
 
   componentDidMount = () => {
@@ -54,19 +55,22 @@ class LoginPage extends React.Component {
   };
 
   _loginUser = () => {
-    let email = this.state.email;
-    let psw = this.state.password;
+    this.setState({loading: true}, () => {
+      let email = this.state.email;
+      let psw = this.state.password;
 
-    if (email && psw) {
-      this.props.signIn({
-        email: email,
-        password: psw
-      });
-    } else {
-      this.setState({
-        error: true
-      });
-    }
+      if (email && psw) {
+        this.props.signIn({
+          email: email,
+          password: psw
+        });
+      } else {
+        this.setState({
+          error: true,
+          loading: false,
+        });
+      }
+    })
   };
 
   render() {
@@ -87,6 +91,14 @@ class LoginPage extends React.Component {
       }
     } else {
       if (auth.uid !== undefined) return <Redirect to="/manage" />;
+    }
+
+    if(authErrorDetails){
+      if(this.state.loading === true){
+        this.setState({
+          loading: false,
+        });
+      }
     }
 
     return (
@@ -129,8 +141,12 @@ class LoginPage extends React.Component {
               />
             </MDBCol>
           </MDBRow>
-          <MDBBtn color="orange" type="submit">
-            <MDBIcon icon="angle-right" />
+          <MDBBtn color="orange" type="submit" disabled={this.state.loading}>
+            {!this.state.loading ? (
+              <MDBIcon icon="angle-right" />
+            ) : (
+              <MDBIcon icon="spinner fa-spin" />
+            )}
             Login
           </MDBBtn>
         </form>
