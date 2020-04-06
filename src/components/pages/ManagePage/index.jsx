@@ -163,7 +163,6 @@ class ProfilePage extends React.Component {
   getUserList = (users) => {
     return users && users.map((user, i) => {
       if (!user.admin && !user.banned) {
-        console.log(user);
         return {
           name: user.first_name + " " + user.last_name,
           company: user.company.name,
@@ -299,6 +298,7 @@ class ProfilePage extends React.Component {
   };
 
   fillTable = (users) => {
+    console.log("users", users);
     this.setState({
       data: {
         ...this.state.data,
@@ -310,7 +310,7 @@ class ProfilePage extends React.Component {
   render() {
     const { auth, profile, users } = this.props;
 
-    console.log(auth, profile);
+    console.log(auth, profile, this.state, users);
 
     // Check if firebase has loaded profile data
     if(!profile.isLoaded){
@@ -329,7 +329,7 @@ class ProfilePage extends React.Component {
         this.props.getUsers();
       } else {
         if (!this.state.data.rows) {
-          this.fillTable();
+          this.fillTable(this.props.users);
         }
       }
 
