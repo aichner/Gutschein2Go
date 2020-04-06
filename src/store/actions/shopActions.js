@@ -1,4 +1,4 @@
-export const checkName = name => {
+export const checkName = (name) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     console.log(name);
     const firebase = getFirebase();
@@ -7,10 +7,10 @@ export const checkName = name => {
     firestore
       .collection("partners")
       .get()
-      .then(querySnapshot => {
+      .then((querySnapshot) => {
         let result = undefined;
         let found = false;
-        querySnapshot.forEach(function(doc) {
+        querySnapshot.forEach(function (doc) {
           // doc.data() is never undefined for query doc snapshots
           result = doc.data();
           if (result) {
@@ -21,11 +21,11 @@ export const checkName = name => {
         });
         if (found) {
           dispatch({
-            type: "SHOP_FOUND"
+            type: "SHOP_FOUND",
           });
         } else {
           dispatch({
-            type: "SHOP_NOTFOUND"
+            type: "SHOP_NOTFOUND",
           });
         }
       });
@@ -42,8 +42,8 @@ export const getUsers = () => {
     firestore
       .collection("partners")
       .get()
-      .then(querySnapshot => {
-        let users = querySnapshot.docs.map(doc => {
+      .then((querySnapshot) => {
+        let users = querySnapshot.docs.map((doc) => {
           let data = doc.data();
           data.uid = doc.id;
           return data;
@@ -51,19 +51,19 @@ export const getUsers = () => {
         console.log("Users", users);
         dispatch({
           type: "GETUSERS_SUCCESS",
-          users
+          users,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({
           type: "GETUSERS_ERROR",
-          err
+          err,
         });
       });
   };
 };
 
-export const verifyUser = uid => {
+export const verifyUser = (uid) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
@@ -73,7 +73,7 @@ export const verifyUser = uid => {
       .doc(uid)
       .set(
         {
-          verified: true
+          verified: true,
         },
         { merge: true }
       )
@@ -81,36 +81,40 @@ export const verifyUser = uid => {
         firestore
           .collection("partners")
           .get()
-          .then(querySnapshot => {
-            let users = querySnapshot.docs.map(doc => {
+          .then((querySnapshot) => {
+            let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
               data.uid = doc.id;
               return data;
             });
             dispatch({
               type: "GETUSERS_SUCCESS",
-              users
+              users,
             });
           })
-          .catch(err => {
+          .catch((err) => {
             dispatch({
               type: "GETUSERS_ERROR",
-              err
+              err,
             });
           });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "VERIFY_ERROR", err });
       });
   };
 };
 
-export const configVouchers = (uid, hasDigital, hasPhysical, shopName, shopType) => {
+export const configVouchers = (
+  uid,
+  hasDigital,
+  hasPhysical,
+  shopName,
+  shopType
+) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
-
-    console.log(uid, hasDigital, hasPhysical, shopName, shopType);
 
     firestore
       .collection("partners")
@@ -123,7 +127,7 @@ export const configVouchers = (uid, hasDigital, hasPhysical, shopName, shopType)
             hasPhysical: hasPhysical !== undefined ? hasPhysical : false,
             name: shopName,
             type: shopType,
-          }
+          },
         },
         { merge: true }
       )
@@ -131,31 +135,31 @@ export const configVouchers = (uid, hasDigital, hasPhysical, shopName, shopType)
         firestore
           .collection("partners")
           .get()
-          .then(querySnapshot => {
-            let users = querySnapshot.docs.map(doc => {
+          .then((querySnapshot) => {
+            let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
               data.uid = doc.id;
               return data;
             });
             dispatch({
               type: "GETUSERS_SUCCESS",
-              users
+              users,
             });
           })
-          .catch(err => {
+          .catch((err) => {
             dispatch({
               type: "GETUSERS_ERROR",
-              err
+              err,
             });
           });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "CONFIGVOUCHERS_ERROR", err });
       });
   };
 };
 
-export const activateShop = uid => {
+export const activateShop = (uid) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
@@ -166,8 +170,8 @@ export const activateShop = uid => {
       .set(
         {
           shop: {
-            active: true
-          }
+            active: true,
+          },
         },
         { merge: true }
       )
@@ -175,31 +179,31 @@ export const activateShop = uid => {
         firestore
           .collection("partners")
           .get()
-          .then(querySnapshot => {
-            let users = querySnapshot.docs.map(doc => {
+          .then((querySnapshot) => {
+            let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
               data.uid = doc.id;
               return data;
             });
             dispatch({
               type: "GETUSERS_SUCCESS",
-              users
+              users,
             });
           })
-          .catch(err => {
+          .catch((err) => {
             dispatch({
               type: "GETUSERS_ERROR",
-              err
+              err,
             });
           });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "OPENSHOP_ERROR", err });
       });
   };
 };
 
-export const closeShop = uid => {
+export const closeShop = (uid) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
@@ -210,8 +214,8 @@ export const closeShop = uid => {
       .set(
         {
           shop: {
-            active: false
-          }
+            active: false,
+          },
         },
         { merge: true }
       )
@@ -219,31 +223,31 @@ export const closeShop = uid => {
         firestore
           .collection("partners")
           .get()
-          .then(querySnapshot => {
-            let users = querySnapshot.docs.map(doc => {
+          .then((querySnapshot) => {
+            let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
               data.uid = doc.id;
               return data;
             });
             dispatch({
               type: "GETUSERS_SUCCESS",
-              users
+              users,
             });
           })
-          .catch(err => {
+          .catch((err) => {
             dispatch({
               type: "GETUSERS_ERROR",
-              err
+              err,
             });
           });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "OPENSHOP_ERROR", err });
       });
   };
 };
 
-export const banUser = uid => {
+export const banUser = (uid) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
@@ -253,7 +257,7 @@ export const banUser = uid => {
       .doc(uid)
       .set(
         {
-          banned: true
+          banned: true,
         },
         { merge: true }
       )
@@ -261,25 +265,25 @@ export const banUser = uid => {
         firestore
           .collection("partners")
           .get()
-          .then(querySnapshot => {
-            let users = querySnapshot.docs.map(doc => {
+          .then((querySnapshot) => {
+            let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
               data.uid = doc.id;
               return data;
             });
             dispatch({
               type: "GETUSERS_SUCCESS",
-              users
+              users,
             });
           })
-          .catch(err => {
+          .catch((err) => {
             dispatch({
               type: "GETUSERS_ERROR",
-              err
+              err,
             });
           });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "BAN_ERROR", err });
       });
   };

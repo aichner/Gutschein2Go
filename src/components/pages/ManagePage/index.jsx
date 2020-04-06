@@ -338,7 +338,6 @@ class ProfilePage extends React.Component {
   };
 
   fillTable = (users) => {
-    console.log("users", users);
     this.setState({
       data: {
         ...this.state.data,
@@ -349,8 +348,6 @@ class ProfilePage extends React.Component {
 
   render() {
     const { auth, profile, users } = this.props;
-
-    console.log(auth, profile, this.state, users);
 
     // Check if firebase has loaded profile data
     if (!profile.isLoaded) {
@@ -666,7 +663,6 @@ class ProfilePage extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile,
