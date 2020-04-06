@@ -29,7 +29,7 @@ import {
 import "./loginpage.scss";
 
 //> Images
-import IMGlogo from "../../../assets/content/h50.png";
+import IMGlogo from "../../../assets/content/partners.jpg";
 
 class LoginPage extends React.Component {
   state = {
@@ -91,7 +91,7 @@ class LoginPage extends React.Component {
 
     return (
       <MDBContainer id="login" className="text-center text-white pt-5 mt-5">
-        <img src={IMGlogo} alt="SithCult logo" className="img-fluid" />
+        <img src={IMGlogo} alt="Gutschein2Go logo" className="img-fluid" />
         <form onSubmit={this.submitHandler}>
           <MDBRow className="flex-center">
             <MDBCol md="4">
