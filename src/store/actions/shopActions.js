@@ -105,7 +105,7 @@ export const verifyUser = uid => {
   };
 };
 
-export const configVouchers = uid => {
+export const configVouchers = (uid, hasDigital, hasPhysical) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
@@ -116,7 +116,9 @@ export const configVouchers = uid => {
       .set(
         {
           shop: {
-            configured: true
+            configured: true,
+            hasDigital: hasDigital !== undefined ? hasDigital : false,
+            hasPhysical: hasPhysical !== undefined ? hasPhysical : false,
           }
         },
         { merge: true }

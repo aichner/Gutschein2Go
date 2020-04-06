@@ -7,6 +7,8 @@ import { Link, Redirect, withRouter } from "react-router-dom";
 //> Additional modules
 // Firebase
 import firebase from "firebase";
+// Copy to clipboard
+import copy from "copy-to-clipboard";
 
 //> Redux
 // Connect
@@ -39,6 +41,9 @@ import {
   MDBBtn,
   MDBBadge,
   MDBIcon,
+  MDBFormInline,
+  MDBInput,
+  MDBAlert,
   MDBSpinner,
 } from "mdbreact";
 import { Radar } from "react-chartjs-2";
@@ -66,31 +71,26 @@ class ProfilePage extends React.Component {
           {
             label: "Name",
             field: "name",
-            sort: "asc"
-          },
-          {
-            label: "Company",
-            field: "company",
-            sort: "asc"
+            sort: "asc",
           },
           {
             label: "Info",
             field: "contact",
-            sort: "asc"
+            sort: "asc",
           },
           {
             label: "Status",
             field: "status",
-            sort: "disabled"
+            sort: "disabled",
           },
           {
             label: "Actions",
             field: "actions",
-            sort: "disabled"
-          }
+            sort: "disabled",
+          },
         ],
-        rows: undefined
-      }
+        rows: undefined,
+      },
     };
   }
 
@@ -101,26 +101,50 @@ class ProfilePage extends React.Component {
   componentWillReceiveProps(nextProps) {
     // Check if users have changed
     if (JSON.stringify(this.props.users) !== JSON.stringify(nextProps.users)) {
-      nextProps.users && this.setState({sync: false}, () => this.fillTable(nextProps.users));
+      nextProps.users &&
+        this.setState({ sync: false }, () => this.fillTable(nextProps.users));
     } else {
-      this.setState({sync: false});
+      this.setState({ sync: false });
     }
   }
 
-  toggle = user => {
+  toggle = (user) => {
     if (!this.state.modal) {
       this.setState({
         modal: true,
         modalUser: {
           name: user.first_name + " " + user.last_name,
           company: user.company.name,
-          uid: user.uid
-        }
+          uid: user.uid,
+        },
       });
     } else {
       this.setState({
         modal: false,
-        modalUser: undefined
+        modalUser: undefined,
+      });
+    }
+  };
+
+  toggleVoucherConfig = (user) => {
+    if (!this.state.modalVoucherConfig) {
+      this.setState({
+        modalVoucherConfig: true,
+        voucherConfigModal: {
+          company: user.company.name,
+          shopName: user.shop.name,
+          uid: user.uid,
+        },
+      });
+    } else {
+      this.setState({
+        modalVoucherConfig: false,
+        voucherConfigModal: undefined,
+        voucherConfigModalError: undefined,
+        changeShopName: "",
+        hasPhysical: false,
+        hasDigital: false,
+        changeShopType: "",
       });
     }
   };
@@ -161,140 +185,155 @@ class ProfilePage extends React.Component {
   };
 
   getUserList = (users) => {
-    return users && users.map((user, i) => {
-      if (!user.admin && !user.banned) {
-        return {
-          name: user.first_name + " " + user.last_name,
-          company: user.company.name,
-          contact: (
-            <>
-              <p>
-                <a href={"mailto:" + user.email}>{user.email}</a>
-              </p>
-              {user.phone ? <p>{user.phone}</p> : null}
-              {user.shop.active ? (
-                <p>
-                  <a
-                    href={"https://g2g.at/" + user.shop.name}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {"www.g2g.at/" + user.shop.name}
-                  </a>
+    return (
+      users &&
+      users.map((user, i) => {
+        if (!user.admin && !user.banned) {
+          return {
+            name: (
+              <>
+                <p className="font-weight-bold mb-1">{user.company.name}</p>
+                <p className="mb-0">{user.first_name + " " + user.last_name}</p>
+              </>
+            ),
+            contact: (
+              <>
+                <p
+                  className="mb-1 blue-text clickable"
+                  onClick={() => copy(user.email)}
+                >
+                  {user.email} <MDBIcon far icon="copy" />
                 </p>
-              ) : null}
-            </>
-          ),
-          status: (
-            <>
-              {user.verified ? (
-                <MDBBadge color="success">Verified</MDBBadge>
-              ) : (
-                <MDBBadge color="danger">Not verified</MDBBadge>
-              )}
-              {user.shop.active ? (
-                <MDBBadge color="success">Shop active</MDBBadge>
-              ) : (
-                <MDBBadge color="warning">Shop inactive</MDBBadge>
-              )}
-              {user.shop.configured && (
-                <MDBBadge color="info">Has vouchers</MDBBadge>
-              )}
-            </>
-          ),
-          actions: (
-            <>
-              {!user.verified && (
-                <MDBBtn
-                  color="success"
-                  className="px-3 m-0 mr-2"
-                  size="sm"
-                  onClick={() => this.props.verifyUser(user.uid)}
-                >
-                  <MDBIcon icon="check" />
-                  Verify
-                </MDBBtn>
-              )}
-              {user.shop.active && user.verified && (
-                <MDBBtn color="info" className="px-3 m-0 mr-2" size="sm" disabled>
-                  <MDBIcon far icon="credit-card" />
-                  Buchung
-                </MDBBtn>
-              )}
-              {user.verified && !user.shop.configured && (
-                <MDBBtn 
-                color="info"
-                className="px-3 m-0 mr-2"
-                size="sm"
-                onClick={() => this.props.configVouchers(user.uid)}
-                >
-                  <MDBIcon icon="check" />
-                  Vouchers configured
-                </MDBBtn>
-              )}
-              {!user.shop.active && user.verified && user.shop.configured && (
-                <MDBBtn 
-                color="green"
-                className="px-3 m-0 mr-2"
-                size="sm"
-                onClick={() => this.props.activateShop(user.uid)}
-                >
-                  <MDBIcon icon="shopping-bag" />
-                  Activate shop
-                </MDBBtn>
-              )}
-              <MDBPopover placement="right" popover clickable id="popper1">
-                <MDBBtn
-                  className="px-3 m-0 float-right"
-                  color="elegant"
-                  outline
-                  size="sm"
-                >
-                  <MDBIcon icon="ellipsis-h" size="md" className="m-0" />
-                </MDBBtn>
-                <div>
-                  <MDBPopoverHeader>More</MDBPopoverHeader>
-                  <MDBPopoverBody>
-                    {user.verified && (
-                      <MDBBtn
-                        className="w-100"
-                        color="primary"
-                        size="sm"
-                        onClick={() => this.toggleEdit(user)}
-                        disabled
-                      >
-                        <MDBIcon icon="edit" />
-                        Edit shop
-                      </MDBBtn>
-                    )}
-                    {user.verified && user.shop.active && (
-                      <MDBBtn
-                        className="w-100"
-                        color="red"
-                        size="sm"
-                        onClick={() => this.props.closeShop(user.uid)}
-                      >
-                        <MDBIcon icon="shopping-bag" />
-                        Close shop
-                      </MDBBtn>
-                    )}
-                    <MDBBtn
-                      className="w-100"
-                      color="danger"
-                      size="sm"
-                      onClick={() => this.toggle(user)}
+                {user.phone ? <p className="mb-1">{user.phone}</p> : null}
+                {user.shop.active ? (
+                  <p className="mb-0">
+                    <a
+                      href={"https://g2g.at/" + user.shop.name}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <MDBIcon icon="ban" />
-                      Ban
-                    </MDBBtn>
-                  </MDBPopoverBody>
-                </div>
-              </MDBPopover>
-            </>
-          )
-        };
-      }
-    });
+                      {"www.g2g.at/" + user.shop.name}
+                    </a>
+                  </p>
+                ) : null}
+              </>
+            ),
+            status: (
+              <>
+                {user.verified ? (
+                  <MDBBadge color="success">Verified</MDBBadge>
+                ) : (
+                  <MDBBadge color="danger">Not verified</MDBBadge>
+                )}
+                {user.shop.active ? (
+                  <MDBBadge color="success">Shop active</MDBBadge>
+                ) : (
+                  <MDBBadge color="warning">Shop inactive</MDBBadge>
+                )}
+                {user.shop.configured && (
+                  <MDBBadge color="info">Has vouchers</MDBBadge>
+                )}
+              </>
+            ),
+            actions: (
+              <>
+                {!user.verified && (
+                  <MDBBtn
+                    color="success"
+                    className="px-3 m-0 mr-2"
+                    size="sm"
+                    onClick={() => this.props.verifyUser(user.uid)}
+                  >
+                    <MDBIcon icon="check" />
+                    Verify
+                  </MDBBtn>
+                )}
+                {user.shop.active && user.verified && (
+                  <MDBBtn
+                    color="info"
+                    className="px-3 m-0 mr-2"
+                    size="sm"
+                    disabled
+                  >
+                    <MDBIcon far icon="credit-card" />
+                    Buchung
+                  </MDBBtn>
+                )}
+                {user.verified && !user.shop.configured && (
+                  <MDBBtn
+                    color="info"
+                    className="px-3 m-0 mr-2"
+                    size="sm"
+                    onClick={() => this.toggleVoucherConfig(user)}
+                  >
+                    <MDBIcon icon="check" />
+                    Vouchers configured
+                  </MDBBtn>
+                )}
+                {!user.shop.active && user.verified && user.shop.configured && (
+                  <MDBBtn
+                    color="green"
+                    className="px-3 m-0 mr-2"
+                    size="sm"
+                    onClick={() => this.props.activateShop(user.uid)}
+                  >
+                    <MDBIcon icon="shopping-bag" />
+                    Activate shop
+                  </MDBBtn>
+                )}
+                <MDBPopover placement="right" popover clickable id="popper1">
+                  <MDBBtn
+                    className="px-3 m-0 float-right"
+                    color="elegant"
+                    outline
+                    size="sm"
+                  >
+                    <MDBIcon icon="ellipsis-h" size="md" className="m-0" />
+                  </MDBBtn>
+                  <div>
+                    <MDBPopoverHeader>More</MDBPopoverHeader>
+                    <MDBPopoverBody>
+                      {user.verified && (
+                        <MDBBtn
+                          className="w-100"
+                          color="primary"
+                          size="sm"
+                          onClick={() => this.toggleEdit(user)}
+                          disabled
+                        >
+                          <MDBIcon icon="edit" />
+                          Edit shop
+                        </MDBBtn>
+                      )}
+                      {user.verified && user.shop.active && (
+                        <MDBBtn
+                          className="w-100"
+                          color="red"
+                          size="sm"
+                          onClick={() => this.props.closeShop(user.uid)}
+                        >
+                          <MDBIcon icon="shopping-bag" />
+                          Close shop
+                        </MDBBtn>
+                      )}
+                      <MDBBtn
+                        className="w-100"
+                        color="danger"
+                        size="sm"
+                        onClick={() => this.toggle(user)}
+                      >
+                        <MDBIcon icon="ban" />
+                        Ban
+                      </MDBBtn>
+                    </MDBPopoverBody>
+                  </div>
+                </MDBPopover>
+              </>
+            ),
+          };
+        }
+      })
+    );
   };
 
   fillTable = (users) => {
@@ -302,8 +341,8 @@ class ProfilePage extends React.Component {
     this.setState({
       data: {
         ...this.state.data,
-        rows: this.getUserList(users)
-      }
+        rows: this.getUserList(users),
+      },
     });
   };
 
@@ -313,7 +352,7 @@ class ProfilePage extends React.Component {
     console.log(auth, profile, this.state, users);
 
     // Check if firebase has loaded profile data
-    if(!profile.isLoaded){
+    if (!profile.isLoaded) {
       return (
         <MDBContainer className="flex-center my-5 py-5">
           <MDBSpinner />
@@ -359,25 +398,24 @@ class ProfilePage extends React.Component {
                   </p>
                 </MDBCol>
                 <MDBCol md="8">
-                {!this.state.sync ? (
-                  <MDBBtn 
-                  color="white"
-                  onClick={() => {
-                    this.setState({sync: true}, () => this.props.getUsers())
-                  }}
-                  >
-                    <MDBIcon icon="sync-alt" />
-                    Reload
-                  </MDBBtn>
-                ) : (
-                  <MDBBtn 
-                  color="white"
-                  disabled
-                  >
-                    <MDBIcon icon="sync-alt fa-spin" />
-                    Reloading
-                  </MDBBtn>
-                )}
+                  {!this.state.sync ? (
+                    <MDBBtn
+                      color="white"
+                      onClick={() => {
+                        this.setState({ sync: true }, () =>
+                          this.props.getUsers()
+                        );
+                      }}
+                    >
+                      <MDBIcon icon="sync-alt" />
+                      Reload
+                    </MDBBtn>
+                  ) : (
+                    <MDBBtn color="white" disabled>
+                      <MDBIcon icon="sync-alt fa-spin" />
+                      Reloading
+                    </MDBBtn>
+                  )}
                   <a
                     href="https://console.firebase.google.com/u/0/project/gutschein2go/overview"
                     target="_blank"
@@ -430,7 +468,11 @@ class ProfilePage extends React.Component {
               isOpen={this.state.modal}
               toggle={this.toggle}
             >
-              <MDBModalHeader className="text-center" titleClass="w-100" tag="p">
+              <MDBModalHeader
+                className="text-center"
+                titleClass="w-100"
+                tag="p"
+              >
                 Are you sure?
               </MDBModalHeader>
               <MDBModalBody className="text-center">
@@ -444,7 +486,7 @@ class ProfilePage extends React.Component {
                   color="danger"
                   onClick={() => {
                     this.toggle();
-                    this.props.banUser(this.state.modalUser.uid)
+                    this.props.banUser(this.state.modalUser.uid);
                   }}
                 >
                   <MDBIcon icon="ban" />
@@ -456,30 +498,185 @@ class ProfilePage extends React.Component {
               </MDBModalFooter>
             </MDBModal>
           )}
+          {this.state.modalVoucherConfig && (
+            <MDBModal
+              modalStyle="info"
+              className="text-white modalVoucher"
+              size="md"
+              backdrop={true}
+              isOpen={this.state.modalVoucherConfig}
+              toggle={this.toggleVoucherConfig}
+            >
+              <MDBModalHeader
+                className="text-center"
+                titleClass="w-100"
+                tag="p"
+              >
+                Set vouchers
+              </MDBModalHeader>
+              <MDBModalBody className="text-center">
+                <p className="lead mb-0">
+                  Set vouchers of{" "}
+                  <strong>
+                    {this.state.voucherConfigModal &&
+                      this.state.voucherConfigModal.company}
+                  </strong>
+                  .
+                </p>
+                <a
+                  href="https://gutschein2go.myshopify.com/admin/collections"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MDBBtn color="green">
+                    <MDBIcon fab icon="shopify" />
+                    Create collection
+                  </MDBBtn>
+                </a>
+                <MDBFormInline className="flex-center mt-4">
+                  <MDBInput
+                    label="Has digital"
+                    filled
+                    type="checkbox"
+                    name="hasDigital"
+                    id="checkbox1"
+                    onChange={(e) => {
+                      this.setState({ [e.target.name]: e.target.checked });
+                    }}
+                    containerClass="mr-5"
+                  />
+                  <MDBInput
+                    label="Has physical"
+                    filled
+                    type="checkbox"
+                    name="hasPhysical"
+                    id="checkbox2"
+                    onChange={(e) => {
+                      this.setState({ [e.target.name]: e.target.checked });
+                    }}
+                    containerClass="mr-5"
+                  />
+                </MDBFormInline>
+                <p className="lead mt-3 mb-0">Shop Name</p>
+                {this.state.voucherConfigModal &&
+                this.state.voucherConfigModal.shopName ? (
+                  <input
+                    type="text"
+                    className="form-control"
+                    disabled
+                    value={this.state.voucherConfigModal.shopName}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={this.state.changeShopName}
+                    onChange={(e) =>
+                      this.setState({ changeShopName: e.target.value })
+                    }
+                  />
+                )}
+                {this.state.voucherConfigModal &&
+                this.state.voucherConfigModal.shopType ? (
+                  <input
+                    type="text"
+                    className="form-control"
+                    disabled
+                    value={this.state.voucherConfigModal.shopType}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={this.state.changeShopType}
+                    onChange={(e) =>
+                      this.setState({ changeShopType: e.target.value })
+                    }
+                  />
+                )}
+                {this.state.voucherConfigModalError && (
+                  <MDBAlert color="danger" className="mt-3 mb-0">
+                    {this.state.voucherConfigModalError}
+                  </MDBAlert>
+                )}
+              </MDBModalBody>
+              <MDBModalFooter className="justify-content-center">
+                <MDBBtn
+                  color="success"
+                  onClick={() => {
+                    if (
+                      this.state.voucherConfigModal.shopName ||
+                      this.state.changeShopName
+                    ) {
+                      if (
+                        this.state.voucherConfigModal.shopType ||
+                        this.tate.changeShopType
+                      ) {
+                      } else {
+                        this.setState({
+                          voucherConfigModalError:
+                            "Please enter a valid shop type. (Cafè, Restaurant, Friseur, ...)",
+                        });
+                      }
+                      if (this.state.hasDigital || this.state.hasPhysical) {
+                        this.toggleVoucherConfig();
+                        this.props.configVouchers(
+                          this.state.voucherConfigModal.uid,
+                          this.state.hasDigital,
+                          this.state.hasPhysical,
+                          this.state.hasShopName
+                        );
+                      } else {
+                        this.setState({
+                          voucherConfigModalError:
+                            "Please select at least one type of vouchers.",
+                        });
+                      }
+                    } else {
+                      this.setState({
+                        voucherConfigModalError:
+                          "Please set a unique shop name.",
+                      });
+                    }
+                  }}
+                >
+                  <MDBIcon icon="check" />
+                  Set permanently
+                </MDBBtn>
+                <MDBBtn
+                  color="elegant"
+                  outline
+                  onClick={this.toggleVoucherConfig}
+                >
+                  Cancel
+                </MDBBtn>
+              </MDBModalFooter>
+            </MDBModal>
+          )}
         </div>
       );
     }
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   console.log(state);
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile,
-    users: state.shop.users
+    users: state.shop.users,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     signOut: () => dispatch(signOut()),
     getUsers: () => dispatch(getUsers()),
-    verifyUser: uid => dispatch(verifyUser(uid)),
-    banUser: uid => dispatch(banUser(uid)),
-    activateShop: uid => dispatch(activateShop(uid)),
-    closeShop: uid => dispatch(closeShop(uid)),
-    configVouchers: uid => dispatch(configVouchers(uid)),
+    verifyUser: (uid) => dispatch(verifyUser(uid)),
+    banUser: (uid) => dispatch(banUser(uid)),
+    activateShop: (uid) => dispatch(activateShop(uid)),
+    closeShop: (uid) => dispatch(closeShop(uid)),
+    configVouchers: (uid) => dispatch(configVouchers(uid)),
   };
 };
 
