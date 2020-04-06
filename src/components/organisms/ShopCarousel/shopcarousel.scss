@@ -1,0 +1,38 @@
+#shopcarousel {
+  .carousel-multi-item {
+    .card {
+      box-shadow: none;
+      background: darken(white, 3%);
+      h4{
+        margin-bottom: 0;
+      }
+      .badge{
+        padding: .5rem;
+        i{
+          margin-right: .3rem;
+        }
+        margin: .2rem;
+      }
+    }
+    .controls-top .btn-floating {
+      box-shadow: none;
+      background: #ff8910;
+      &:hover {
+        background: lighten(#ff8910, 10%) !important;
+      }
+    }
+    .carousel-indicators {
+      li {
+        background-color: #ff8910 !important;
+      }
+      .active {
+        background-color: #ff8910 !important;
+      }
+    }
+  }
+}
+
+/** 
+ * SPDX-License-Identifier: (EUPL-1.2)
+ * Copyright © 2019 Christian Aichner
+ */
