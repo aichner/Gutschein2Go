@@ -349,6 +349,8 @@ class ProfilePage extends React.Component {
   render() {
     const { auth, profile, users } = this.props;
 
+    console.log(this.state.voucherConfigModal);
+
     // Check if firebase has loaded profile data
     if (!profile.isLoaded) {
       return (
@@ -568,12 +570,14 @@ class ProfilePage extends React.Component {
                   <input
                     type="text"
                     className="form-control"
+                    placeholder="Shop name"
                     value={this.state.changeShopName}
                     onChange={(e) =>
                       this.setState({ changeShopName: e.target.value })
                     }
                   />
                 )}
+                <p className="lead mt-3 mb-0">Shop Type</p>
                 {this.state.voucherConfigModal &&
                 this.state.voucherConfigModal.shopType ? (
                   <input
@@ -586,6 +590,7 @@ class ProfilePage extends React.Component {
                   <input
                     type="text"
                     className="form-control"
+                    placeholder="Cafè, Restaurant, ..."
                     value={this.state.changeShopType}
                     onChange={(e) =>
                       this.setState({ changeShopType: e.target.value })
@@ -610,29 +615,29 @@ class ProfilePage extends React.Component {
                         this.state.voucherConfigModal.shopType ||
                         this.state.changeShopType
                       ) {
+                        if (this.state.hasDigital || this.state.hasPhysical) {
+                          this.toggleVoucherConfig();
+                          this.props.configVouchers(
+                            this.state.voucherConfigModal.uid,
+                            this.state.hasDigital,
+                            this.state.hasPhysical,
+                            this.state.changeShopName
+                              ? this.state.changeShopName
+                              : this.state.voucherConfigModal.shopName,
+                            this.state.changeShopType
+                              ? this.state.changeShopType
+                              : this.state.voucherConfigModal.shopType
+                          );
+                        } else {
+                        this.setState({
+                          voucherConfigModalError:
+                            "Please select at least one type of vouchers.",
+                          });
+                        }
                       } else {
                         this.setState({
                           voucherConfigModalError:
                             "Please enter a valid shop type. (Cafè, Restaurant, Friseur, ...)",
-                        });
-                      }
-                      if (this.state.hasDigital || this.state.hasPhysical) {
-                        this.toggleVoucherConfig();
-                        this.props.configVouchers(
-                          this.state.voucherConfigModal.uid,
-                          this.state.hasDigital,
-                          this.state.hasPhysical,
-                          this.state.changeShopName
-                            ? this.state.changeShopName
-                            : this.state.voucherConfigModal.shopName,
-                          this.state.changeShopType
-                            ? this.state.changeShopType
-                            : this.state.voucherConfigModal.shopType
-                        );
-                      } else {
-                        this.setState({
-                          voucherConfigModalError:
-                            "Please select at least one type of vouchers.",
                         });
                       }
                     } else {
