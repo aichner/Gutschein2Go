@@ -105,10 +105,12 @@ export const verifyUser = uid => {
   };
 };
 
-export const configVouchers = (uid, hasDigital, hasPhysical) => {
+export const configVouchers = (uid, hasDigital, hasPhysical, shopName, shopType) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
+
+    console.log(uid, hasDigital, hasPhysical, shopName, shopType);
 
     firestore
       .collection("partners")
@@ -119,6 +121,8 @@ export const configVouchers = (uid, hasDigital, hasPhysical) => {
             configured: true,
             hasDigital: hasDigital !== undefined ? hasDigital : false,
             hasPhysical: hasPhysical !== undefined ? hasPhysical : false,
+            name: shopName,
+            type: shopType,
           }
         },
         { merge: true }

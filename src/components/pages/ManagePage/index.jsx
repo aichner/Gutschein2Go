@@ -133,6 +133,7 @@ class ProfilePage extends React.Component {
         voucherConfigModal: {
           company: user.company.name,
           shopName: user.shop.name,
+          shopType: user.shop.type,
           uid: user.uid,
         },
       });
@@ -610,7 +611,7 @@ class ProfilePage extends React.Component {
                     ) {
                       if (
                         this.state.voucherConfigModal.shopType ||
-                        this.tate.changeShopType
+                        this.state.changeShopType
                       ) {
                       } else {
                         this.setState({
@@ -624,7 +625,12 @@ class ProfilePage extends React.Component {
                           this.state.voucherConfigModal.uid,
                           this.state.hasDigital,
                           this.state.hasPhysical,
-                          this.state.hasShopName
+                          this.state.changeShopName
+                            ? this.state.changeShopName
+                            : this.state.voucherConfigModal.shopName,
+                          this.state.changeShopType
+                            ? this.state.changeShopType
+                            : this.state.voucherConfigModal.shopType
                         );
                       } else {
                         this.setState({
@@ -676,7 +682,10 @@ const mapDispatchToProps = (dispatch) => {
     banUser: (uid) => dispatch(banUser(uid)),
     activateShop: (uid) => dispatch(activateShop(uid)),
     closeShop: (uid) => dispatch(closeShop(uid)),
-    configVouchers: (uid) => dispatch(configVouchers(uid)),
+    configVouchers: (uid, hasDigital, hasPhysical, shopName, shopType) =>
+      dispatch(
+        configVouchers(uid, hasDigital, hasPhysical, shopName, shopType)
+      ),
   };
 };
 
