@@ -111,22 +111,425 @@ class MessagePage extends React.Component {
             </p>
           </div>
         )}
-        {this.props.location.pathname === "/agb" && (
+        {this.props.location.pathname === "/anb" && (
           <div className="text-center mt-5">
             <MDBIcon
-              icon="times-circle"
+              icon="balance-scale"
               size="3x"
-              className="text-danger mb-3"
+              className="text-success mb-3"
             />
-            <h2>Die AGB werden derzeit überarbeitet.</h2>
+            <h2>Allgemeine Nutzungsbedingungen</h2>
             <p className="lead">
-              Es sind bis zur Einstellung der neuen AGB zwar Registrierungen
-              möglich, diese werden jedoch im nachhinein aufgefordert unseren
-              AGB explizit zuzustimmen, da sonst ist keine Partnerschaft möglich ist.
+              für den Online-Marktplatz „www.gutschein2go.at“ [ANB]
             </p>
-            <p className="lead">
-            Erst bei expliziter Zustimmung wird der registrierte Nutzer aktiviert.
-            </p>
+            <div className="text-left">
+              <p>
+                <strong>Werbeagentur Christian Aichner</strong>
+                <br />
+                Emailwerkstraße 29
+                <br />
+                9523 Villach-Landskron
+                <br />
+                info@gutschein2go.at
+                <br />
+                www.gutschein2go.at
+                <br />
+                +43 681 205 027 54
+                <br />
+                GISA: 31375511
+                <br />
+                (im Folgenden kurz „gutschein2go“)
+              </p>
+              <p>
+                gutschein2go versteht sich als Internetdienst für Unternehmen,
+                um diesen die Möglichkeit zu bieten, auf einem Online-Marktplatz
+                Gutscheine für Waren und Dienstleistungen verkaufen zu können
+                (im Folgenden kurz „Verkäufer“) und als Internetdienst für
+                Käufer, um diesen die Möglichkeit zu bieten, auf einem
+                Online-Marktplatz von Verkäufern angebotene Gutscheine für Waren
+                und Dienstleistungen von diesen erwerben zu können (im Folgenden
+                kurz „Nutzer“).{" "}
+              </p>
+              <p className="lead font-weight-bold">1. Geltungsbereich</p>
+              <p>
+                1.1 Diese Allgemeinen Nutzungsbedingungen für den
+                Online-Marktplatz „www.gutschein2go.at“ (im Folgenden kurz
+                „ANB“) gelten für sämtliche von gutschein2go auf der
+                Internetseite www.gutschein2go.at sowie aller zu dieser Domain
+                gehörenden Subdomains und Webseiten (im Folgenden kurz
+                „www.gutschein2go.at“) zur Verfügung gestellten Internetdienste.
+                Sie regeln daher das Verhältnis zwischen Nutzern und Verkäufern
+                einerseits und gutschein2go andererseits (im Folgenden kurz
+                „Nutzungsvertrag“). Die Inanspruchnahme der von gutschein2go auf
+                www.gutschein2go.at zur Verfügung gestellten Internetdienste
+                unterliegt ausschließlich diesen ANB. Von diesen ANB abweichende
+                oder ergänzende Bestimmungen – insbesondere AGB von Nutzern oder
+                Verkäufern – gelten nur bei ausdrücklicher schriftlicher
+                Vereinbarung und nur jeweils für den Einzelfall.
+              </p>
+              <p>
+                1.2 Zudem treten zwischen Verkäufern und gutschein2go die
+                Bestimmungen der Allgemeinen Geschäftsbedingungen für Partner
+                („Partner-AGB“) hinzu.
+              </p>
+              <p className="lead font-weight-bold">
+                2. Internetdienst Online-Marktplatz
+              </p>
+              <p>
+                2.1 gutschein2go stellt unter der Domain „gutschein2go.at“ einen
+                Online-Marktplatz zur Verfügung, auf welchem
+              </p>
+              <p>
+                2.1.1 Verkäufer die Möglichkeit haben, Gutscheine im eigenen
+                Namen und auf eigene Rechnung im Wege einer Online-Präsenz zum
+                Kauf anzubieten und den Kauf bzw Verkauf dieser über den von
+                gutschein2go bereitgestellten Internetdienst abzuwickeln.
+              </p>
+              <p>
+                2.1.2 Nutzer die Möglichkeit haben, von Verkäufern angebotene
+                Gutscheine von diesen zu erwerben und den Kauf über den von
+                gutschein2go bereitgestellten Internetdienst abzuwickeln.
+              </p>
+              <p>
+                2.2 gutschein2go stellt lediglich einen Online-Marktplatz für
+                Verkäufer und Nutzer zur Verfügung und wird weder selbst als
+                Verkäufer noch als Makler tätig. gutschein2go übernimmt
+                lediglich die Zurverfügungstellung des Internetdienstes für den
+                Vertragsabschluss und nach erfolgtem Vertragsabschluss die
+                Zusendung einer Bestätigung über den Vertragsabschlusses sowie
+                die Zusendung des Gutscheins des Verkäufers in elektronischer
+                Form (Download-Link) oder in Papierform im Namen und im Auftrag
+                des Verkäufers. Zudem nimmt gutschein2go als Bote
+                Widerrufserklärungen von Nutzern nach dem Fern- und
+                Auswärtsgeschäfte-Gesetz (FAGG) an Verkäufer entgegen und leitet
+                dies an die Verkäufer weiter.
+              </p>
+              <p>
+                2.3 Ein Kaufvertrag über die auf www.gutschein2go.at angebotenen
+                Gutscheine kommt ausschließlich zwischen dem jeweiligen
+                Verkäufer und dem jeweiligen Nutzer als Käufer zustande. Es
+                obliegt sohin ausschließlich dem Verkäufer, die Leistungen, die
+                mit dem von ihm zum Kauf angebotenen Gutschein bezogen werden
+                können, ausreichend bestimmt, vollständig und wahrheitsgemäß zu
+                bezeichnen.
+              </p>
+              <p>
+                2.4 gutschein2go nimmt keinerlei Einfluss auf die von Verkäufern
+                angebotenen Gutscheine und angeführten Leistungsbeschreibungen.
+              </p>
+              <p>
+                2.5 gutschein2go überprüft nicht, ob die von Verkäufern
+                angebotenen Gutscheine und angeführten Leistungsbeschreibungen
+                rechtmäßig, richtig und vollständig sind, weshalb gutschein2go
+                auch keine Haftung hierfür übernimmt.
+              </p>
+              <p>
+                2.6 So gutschein2go Kenntnis erlangt, dass von Verkäufern
+                angebotenen Gutscheine oder angeführten Leistungsbeschreibungen
+                nicht rechtmäßig, nicht richtig oder nicht vollständig sind,
+                wird gutschein2go – nach Wahl von gutschein2go – entweder den
+                Verkäufer zur unverzüglichen Berichtigung bzw Vervollständigung
+                auffordern oder die entsprechenden Inhalte vom Online-Marktplatz
+                entfernen.
+              </p>
+              <p>
+                2.7 gutschein2go behält sich vor, angebotene Gutscheine vom
+                Online-Marktplatz zu entfernen, wenn diese rechtswidrig sind
+                und/oder Rechte Dritter, insbesondere Marken-, Wettbewerbs-,
+                Urheber- oder Persönlichkeitsrechte verletzen. Ebenso behält
+                sich gutschein2go die Entfernung von Gutscheinen vom
+                Online-Marktplatz vor, wenn diese sich auf sittenwidrige
+                Leistungen beziehen.
+              </p>
+              <p>
+                2.8 gutschein2go sagt weder Verkäufern noch Nutzern eine
+                bestimmte Verfügbarkeit des Online-Marktplatz oder eine
+                bestimmte Kompatibilität des Internetdienstes mit von Verkäufern
+                oder Nutzern verwendeter Hard- oder Software zu.
+              </p>
+              <p>
+                2.9 gutschein2go wird die Verfügbarkeit des Online-Marktplatz
+                zeitweilig einschränken, wenn dies im Hinblick auf
+                Kapazitätsgrenzen, die Sicherheit oder Integrität von Servern,
+                die Einhaltung gesetzlicher Bestimmungen oder zur Durchführung
+                technischer Maßnahmen (z.B. Wartungsarbeiten) erforderlich ist.
+              </p>
+              <p>
+                2.10 Darüber hinaus ist gutschein2go berechtigt, seine
+                angebotenen Internetdienste jederzeit endgültig einzustellen,
+                womit der Nutzungsvertrag automatisch endet.
+              </p>
+              <p className="lead font-weight-bold">
+                3. Pflichten der Verkäufer
+              </p>
+              <p>
+                3.1 Die Verkäufer verpflichten sich zur vollständigen,
+                wahrheitsgemäßen und nicht irreführenden Bezeichnung der Waren
+                und Dienstleistungen, die mit den von ihnen auf
+                www.gutschein2go.at angebotenen Gutscheinen bezogen werden
+                können.
+              </p>
+              <p>
+                3.2 Die Verkäufer verpflichten sich, die gesetzlichen
+                Produktkennzeichnungspflichten und die gesetzlichen
+                Informations- und Bestätigungspflichten, insbesondere nach dem
+                Fern- und Auswärtsgeschäfte-Gesetz (FAGG) einzuhalten. Davon
+                abweichend übernimmt gutschein2go im Auftrag und im Namen der
+                Verkäufer die Versendung der Bestätigung über den
+                Vertragsabschluss gemäß § 10 Abs 2 E-Commerce-Gesetz (ECG) und
+                nimmt Widerrufserklärungen nach dem FAGG von Nutzern an
+                Verkäufer als Bote entgegen und leitet dies an die Verkäufer
+                weiter.
+              </p>
+              <p>
+                3.3 Die Verkäufer verpflichten sich, keine Inhalte auf
+                www.gutschein2go.at zu stellen, die sitten- oder rechtswidrig
+                sind oder Rechte Dritter, insbesondere Marken-, Wettbewerbs-,
+                Urheber- oder Persönlichkeitsrechte verletzen.
+              </p>
+              <p className="lead font-weight-bold">
+                4. Vertragsabschluss mit Verkäufer und Widerrufsrecht
+              </p>
+              <p>
+                4.1 Die von den Verkäufern auf www.gutschein2go.at angebotenen
+                Gutscheine stellen eine Einladung zur Anbotslegung durch den
+                Nutzer dar. Durch Anklicken der Schaltfläche „zahlungspflichtig
+                bestellen“ stellt der Nutzer ein verbindliches Angebot auf
+                Abschluss eines Kaufvertrags über den betreffenden Gutschein auf
+                Basis der vom Verkäufer angegebenen Leistungsbeschreibung. Die
+                Annahme des Angebots durch den Verkäufer (und damit der
+                Vertragsabschluss) erfolgt durch eine Bestätigung per E-Mail,
+                die von gutschein2go im Namen und im Auftrag des Verkäufers an
+                den Nutzer gesendet wird.
+              </p>
+              <p>
+                4.2 Ist der Nutzer Verbraucher im Sinne des
+                Konsumentenschutzgesetzes kann er den mit dem Verkäufer
+                abgeschlossenen Kaufvertrag innerhalb von 14 Tage ab dem
+                Vertragsabschluss ohne Angaben von Gründen schriftlich
+                widerrufen.
+              </p>
+              <p>
+                4.3 Zur Ausübung des Widerrufsrechts genügt eine einfache
+                Mitteilung aus der hervorgeht, dass der Nutzer den Kaufvertrag
+                widerrufen möchte, wobei dies mit einem mit der Post versandten
+                Brief, einem Telefax oder einer E-Mail an die jeweilige am
+                Gutschein angegebene Adresse des Verkäufers oder auch an
+                gutschein2go erfolgen kann, wobei gutschein2go die
+                Widerrufserklärungen lediglich als Bote entgegennimmt und an den
+                Verkäufer weiter leitet. Nutzer können hierfür auch das
+                Musterformular im Anhang zu diesen ANB verwenden.
+              </p>
+              <p>
+                4.4 Die Auslieferung des Gutscheines an den Nutzer erfolgt je
+                nachdem, welche Auslieferungsvariante der Nutzer im
+                Bestellprozess gewählt hat, entweder durch Versendung des
+                Gutscheines in Papierform an die von Nutzer angegebene
+                Postanschrift oder durch Bereitstellung eines Links für den
+                Download des Gutscheines durch den Nutzer selbst.
+              </p>
+              <p>
+                4.5 Gutscheine können grundsätzlich 30 Jahre lang nach
+                Vertragsabschluss ausschließlich beim Verkäufer eingelöst
+                werden, außer der Verkäufer schränkt aus sachlich
+                gerechtfertigten Gründen die Gültigkeitsdauer eines Gutscheines
+                ein.
+              </p>
+              <p className="lead font-weight-bold">
+                5. Haftung von gutschein2go
+              </p>
+              <p>5.1 Vertragsverhältnis zwischen Nutzern und Kunden</p>
+              <p>
+                Da gutschein2go lediglich einen Online-Marktplatz zur Verfügung
+                stellt, selbst aber keine Gutscheine verkauft und auch keinen
+                Einfluss auf die von den Verkäufern angebotenen Gutscheinen
+                nimmt, haftet gutschein2go nicht wegen Verletzung von
+                vertraglichen oder vorvertraglichen Verpflichtungen des
+                Verkäufers. gutschein2go haftet daher insbesondere nicht
+              </p>
+              <p>
+                5.1.1 für die Rechtmäßigkeit, die Richtigkeit, oder die
+                Vollständigkeit der von Verkäufern verfassten Inhalte bzw der
+                von diesen angebotenen Gutscheine und angeführten
+                Leistungsbeschreibungen;
+              </p>
+              <p>
+                5.1.2 für das Zustandekommen oder Nichtzustandekommen eines
+                Kauf-, Dienst-, oder werksvertrages im Zusammenhang mit einem
+                von einem Verkäufer auf www.gutschein2go.at angebotenen
+                Gutschein;
+              </p>
+              <p>
+                5.1.3 dafür, dass der Verkäufer die Leistungen zu den
+                vereinbarten Bedingungen erbringt; gutschein2go haftet sohin
+                nicht für die Erfüllung der vom Verkäufer geschuldeten
+                Leistungen bzw die Einlösung des gekauften Gutscheines noch für
+                Ansprüche wegen Nicht- oder Schlechterfüllung gegen einen
+                Verkäufer (dies auch nicht für den Fall, dass es infolge von
+                Tod, Liquidation oder der Eröffnung eines Insolvenzverfahrens
+                oder Nichteröffnung eines solchen mangels Masse nicht mehr zu
+                einer Einlösung des Gutscheins durch den Verkäufer kommen kann);
+              </p>
+              <p>
+                5.1.4 für Ansprüche wegen Produkthaftung gegen einen Verkäufer
+                oder Dritten.
+              </p>
+              <p>5.2 Vertragsverhältnis Nutzungsvertrag</p>
+              <p>
+                gutschein2go haftet gegenüber Nutzern und Verkäufern
+                ausschließlich aus dem Nutzungsvertrag, wobei gutschein2go keine
+                Haftung übernimmt für
+              </p>
+              <p>
+                5.2.1 Schäden, die durch unsachgemäße bzw fehlerhafte Bedienung
+                des Nutzers bzw des Verkäufers oder aufgrund ungeeigneter,
+                verwendeter Hard- oder Software oder aufgrund der
+                Internetanbindung entstehen,
+              </p>
+              <p>
+                5.2.2 Schäden die dem Nutzer oder dem Verkäufer durch eine
+                rechts- oder vertragswidrige Nutzung des Marktplatzes durch ihn
+                selbst oder einen Dritten entstehen,
+              </p>
+              <p>
+                5.2.3 Schäden aus dem Verlust von Inhalten, Informationen oder
+                Daten;
+              </p>
+              <p>
+                5.2.4 die Zustellung der Gutscheine an die Nutzer in
+                elektronischer Form oder in Papierform.
+              </p>
+              <p>
+                5.3 Gegenüber Verkäufern und gegenüber Nutzern, die Unternehmer
+                im Sinne des Konsumentenschutzgesetzes sind, gilt ergänzend zu
+                Punkt 4.1 und Punkt 4.2 Folgendes:
+              </p>
+              <p>
+                gutschein2go haftet – ausgenommen bei Personenschäden –
+                lediglich bei Vorsatz und grober Fahrlässigkeit. gutschein2go
+                haftet – ausgenommen bei Personenschäden – ferner nicht für
+                atypische Schäden, mittelbare Schäden, entgangenen Gewinn,
+                Folge- und Vermögensschäden oder Schäden aufgrund höherer Gewalt
+                (z.B. Streik, Krieg, Erdbeben, Umweltkatastrophen, Epedemien).
+                In jedem Fall ist die Haftung von gutschein2go begrenzt auf den
+                typischerweise entstehenden, vorhersehbaren Schaden.
+                Haftungsansprüche verjähren nach sechs Monaten ab Kenntnis des
+                Geschädigten vom Schaden.
+              </p>
+              <p className="lead font-weight-bold">
+                6. Widerrufsrecht | Widerruf vom Nutzungsvertrag
+              </p>
+              <p>
+                6.1 Bei Inanspruchnahme der von gutschein2go auf
+                www.gutschein2go.at zur Verfügung gestellten Internetdienste
+                entsteht der Nutzungsvertrag. Ist der Nutzer Verbraucher im
+                Sinne des Konsumentenschutzgesetzes kann er diesen
+                Nutzungsvertrag innerhalb von 14 Tage ab dem Vertragsabschluss
+                ohne Angaben von Gründen schriftlich widerrufen.
+              </p>
+              <p>
+                6.2 Zur Ausübung des Widerrufs- bzw Rücktrittsrechts genügt eine
+                einfache Mitteilung aus der hervorgeht, dass der Nutzer den
+                Nutzungsvertrag widerrufen möchte, wobei dies mit einem mit der
+                Post versandten Brief, einem Telefax oder einer E-Mail an die
+                nachstehende Adresse zu erfolgen hat. Nutzer können hierfür auch
+                das Musterformular im Anhang zu diesen ANB verwenden.
+              </p>
+              <p className="lead font-weight-bold">7. Schlussbestimmungen</p>
+              <p>
+                7.1 gutschein2go ist berechtigt, sämtliche Rechte und dem Nutzer
+                und Verkäufer gegenüber bestehende Pflichten im Zusammenhang mit
+                dem Betrieb des Online-Marktplatzes ganz oder teilweise auf eine
+                neu zu gründende Kapitalgesellschaft, an der gutschein2go als
+                Gesellschafter beteiligt sein wird, zu übertragen.
+              </p>
+              <p>
+                7.2 Sollte eine oder mehrere der vorangegangenen Bestimmungen
+                unwirksam oder undurchführbar sein, bleibt die Wirksamkeit der
+                übrigen Bestimmungen davon unberührt. An die Stelle der
+                rechtsunwirksamen oder undurchführbaren Bestimmung tritt die
+                gesetzliche Regelung.
+              </p>
+              <p>
+                7.3 Auf alle Rechtsverhältnisse zwischen gutschein2go einerseits
+                und Nutzern und Verkäufern andererseits findet das Recht der
+                Republik Österreich unter Ausschluss aller nationaler und
+                internationaler Verweisungsnormen sowie des
+                UN-Kaufrechtsübereinkommens Anwendung.
+              </p>
+              <p>
+                7.4 Als ausschließlicher Gerichtsstand wird das sachlich
+                zuständige Gericht in 9500 Villach vereinbart. Handelt es sich
+                beim Nutzer um einen Verbraucher, ist dieser Gerichtsstand nur
+                dann vereinbart, wenn der Verbraucher in diesem Gerichtssprengel
+                seinen Wohnsitz, gewöhnlichen Aufenthalt oder Ort der
+                Beschäftigung hat; es gilt § 14 KSchG.
+              </p>
+              <p>7.5 Vertragssprache ist Deutsch.</p>
+            </div>
+            <div className="text-center">
+              <p className="lead">Muster Widerrufsformular nach dem FAGG</p>
+              <p>
+                (Wenn Sie den Vertrag widerrufen wollen, dann füllen Sie bitte
+                dieses Formular aus und senden Sie es zurück)
+              </p>
+            </div>
+            <div className="text-left">
+              <p>
+                An
+                <br />
+                Werbeagentur Christian Aichner
+                <br />
+                Emailwerkstraße 29
+                <br />
+                9523 Villach-Landskron
+                <br />
+                info@gutschein2go.at
+                <br />
+                www.gutschein2go.at
+              </p>
+              <p>Hiermit wiederrufe ich</p>
+              <p>
+                Vorname: _____________________________________________________
+              </p>
+              <p>
+                Nachname: ____________________________________________________
+              </p>
+              <p>
+                Straße / Nr.: ________________________________________________
+              </p>
+              <p>
+                PLZ / Ort: ___________________________________________________
+              </p>
+              <p>
+                E-Mail: ______________________________________________________
+              </p>
+              <p>
+                 den von mir abgeschlossenen Vertrag über die Inanspruchnahme
+                der von gutschein2go auf www.gutschein2go.at zur Verfügung
+                gestellten Internetdienste.
+              </p>
+              <p>
+                 den zwischen mir und
+                ___________________________________________[Name des Verkäufers]
+                am __________ [Datum] abgeschlossenen Kaufvertrag über einen
+                Gutschein im Wert von EUR_________________ [Gutscheinwert in
+                EUR]. (In diesem Fall wird gutschein2go die Widerrufserklärung
+                als Bote an den Verkäufer weiterleiten).
+                <br />
+                <br />
+              </p>
+              <p>
+                Ort, Datum: _________________________
+                <br />
+                <br />
+              </p>
+              <p>
+                ______________________________
+                <br />
+                Unterschrift
+              </p>
+            </div>
           </div>
         )}
         {this.props.location.pathname === "/privacy" && (

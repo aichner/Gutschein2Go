@@ -53,6 +53,11 @@ class Routes extends React.Component {
         />
         <Route 
         exact
+        path='/anb'
+        render={(props) => <MessagePage {...props}/>}
+        />
+        <Route 
+        exact
         path='/join'
         render={(props) => <JoinPage {...props}/>}
         />
