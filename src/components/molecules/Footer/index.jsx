@@ -61,9 +61,9 @@ class Footer extends React.Component{
                     <img src={logoImg} alt="Naturvertrieb Logo" className="img-fluid"/>
                   </MDBCol>
                   <MDBCol md="3" className="text-center">
-                  <Link to="agb">
+                  <Link to="anb">
                     <li className="list-unstyled">
-                      AGB
+                      Allgemeine Nutzungsbedingungen
                     </li>
                   </Link>
                   <a
