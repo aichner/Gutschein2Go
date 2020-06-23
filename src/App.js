@@ -4,9 +4,7 @@
 import React from "react";
 // DOM bindings for React Router
 import { BrowserRouter as Router } from "react-router-dom";
-//#endregion
 
-//#region > Components
 //> Components
 /**
  * Footer: Global Footer
@@ -16,7 +14,9 @@ import { Footer, Navbar, CookieModal } from "./components/molecules";
 import { ScrollToTop } from "./components/atoms";
 // Routes
 import Routes from "./Routes";
+//#endregion
 
+//#region > Components
 class App extends React.Component {
   render() {
     return (

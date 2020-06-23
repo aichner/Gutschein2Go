@@ -33,14 +33,14 @@ import { ReactComponent as PartyImg } from "../../../assets/content/svg/party.sv
 //#endregion
 
 //#region > Functions
-let backgroundPictures = [baristaBg, breadBg, shopBg];
+const backgroundPictures = [baristaBg, breadBg, shopBg];
 
 function getRandomInt() {
   return Math.floor(Math.random() * Math.floor(backgroundPictures.length));
 }
 
 // Get randomized image
-let randomBG = backgroundPictures[getRandomInt()];
+const randomBG = backgroundPictures[getRandomInt()];
 //#endregion
 
 //#region > Components

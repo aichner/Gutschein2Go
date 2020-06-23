@@ -48,6 +48,7 @@ export const getUsers = () => {
       .then((querySnapshot) => {
         let users = querySnapshot.docs.map((doc) => {
           let data = doc.data();
+
           data.uid = doc.id;
 
           return data;
@@ -88,6 +89,7 @@ export const verifyUser = (uid) => {
           .then((querySnapshot) => {
             let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
+
               data.uid = doc.id;
 
               return data;
@@ -143,6 +145,7 @@ export const configVouchers = (
           .then((querySnapshot) => {
             let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
+
               data.uid = doc.id;
 
               return data;
@@ -188,6 +191,7 @@ export const activateShop = (uid) => {
           .then((querySnapshot) => {
             let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
+
               data.uid = doc.id;
 
               return data;
@@ -233,6 +237,7 @@ export const closeShop = (uid) => {
           .then((querySnapshot) => {
             let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
+
               data.uid = doc.id;
 
               return data;
@@ -276,6 +281,7 @@ export const banUser = (uid) => {
           .then((querySnapshot) => {
             let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
+
               data.uid = doc.id;
 
               return data;

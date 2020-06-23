@@ -32,7 +32,6 @@ class Footer extends React.Component {
         pathBack += "../";
         i++;
       }
-      console.log(pathBack);
 
       this.setState({
         pathBack,
