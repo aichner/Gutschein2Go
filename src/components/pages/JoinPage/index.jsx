@@ -1,3 +1,4 @@
+//#region > Imports
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
@@ -42,7 +43,9 @@ import "./joinpage.scss";
 
 //> Images
 import { ReactComponent as FinishImg } from "../../../assets/content/svg/finish.svg";
+//#endregion
 
+//#region > Components
 class JoinPage extends React.Component {
   state = {
     step: 0,
@@ -63,7 +66,9 @@ class JoinPage extends React.Component {
 
   checkEmail = async (e) => {
     e.preventDefault();
+
     let rtn = await this.props.checkEmail(this.state.email.trim());
+
     // If the email does not yet exist
     if (!rtn) {
       this.setState({ step: 2, emailError: false });
@@ -74,6 +79,7 @@ class JoinPage extends React.Component {
 
   checkPassword = (e) => {
     e.preventDefault();
+
     // Check if passwords match
     if (this.state.password === this.state.password1) {
       this.setState({ passwordError: false, step: 3 });
@@ -860,7 +866,9 @@ class JoinPage extends React.Component {
     );
   }
 }
+//#endregion
 
+//#region > Functions
 const mapStateToProps = (state) => {
   return {
     authError: state.auth.authError,
@@ -878,10 +886,13 @@ const mapDispatchToProps = (dispatch) => {
     checkEmail: (email) => dispatch(checkEmail(email)),
   };
 };
+//#endregion
 
+//#region > Exports
 export default connect(mapStateToProps, mapDispatchToProps)(JoinPage);
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

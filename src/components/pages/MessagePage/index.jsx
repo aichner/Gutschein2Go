@@ -1,14 +1,17 @@
+//#region > Imports
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
 
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
-import { MDBContainer, MDBBtn, MDBAlert, MDBIcon } from "mdbreact";
+import { MDBContainer, MDBBtn, MDBIcon } from "mdbreact";
 
 //> CSS
 import "./messagepage.scss";
+//#endregion
 
+//#region > Components
 class MessagePage extends React.Component {
   render() {
     return (
@@ -113,11 +116,7 @@ class MessagePage extends React.Component {
         )}
         {this.props.location.pathname === "/agb" && (
           <div className="text-center mt-5">
-            <MDBIcon
-              icon="handshake"
-              size="3x"
-              className="text-success mb-3"
-            />
+            <MDBIcon icon="handshake" size="3x" className="text-success mb-3" />
             <h2>Allgemeine Geschäftsbedingungen für Partner</h2>
             <p className="lead">
               für den Online-Marktplatz „www.gutschein2go.at“ [Partner-AGB]
@@ -1349,10 +1348,13 @@ class MessagePage extends React.Component {
     );
   }
 }
+//#endregion
 
+//#region > Exports
 export default MessagePage;
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

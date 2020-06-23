@@ -1,3 +1,4 @@
+//#region > Imports
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
@@ -7,22 +8,15 @@ import { Link, withRouter } from "react-router-dom";
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
 import {
-  MDBEdgeHeader,
-  MDBFreeBird,
   MDBContainer,
   MDBCol,
   MDBRow,
   MDBCardBody,
   MDBIcon,
   MDBCard,
-  MDBCardTitle,
-  MDBCardImage,
-  MDBCardText,
   MDBView,
   MDBMask,
-  MDBInput,
   MDBBtn,
-  MDBFormInline,
   MDBSmoothScroll,
 } from "mdbreact";
 
@@ -36,7 +30,9 @@ import { ReactComponent as DeployImg } from "../../../assets/content/svg/deploy.
 import { ReactComponent as ShopImg } from "../../../assets/content/svg/shop.svg";
 import { ReactComponent as VaultImg } from "../../../assets/content/svg/vault.svg";
 import { ReactComponent as PartyImg } from "../../../assets/content/svg/party.svg";
+//#endregion
 
+//#region > Functions
 let backgroundPictures = [baristaBg, breadBg, shopBg];
 
 function getRandomInt() {
@@ -45,7 +41,9 @@ function getRandomInt() {
 
 // Get randomized image
 let randomBG = backgroundPictures[getRandomInt()];
+//#endregion
 
+//#region > Components
 class HomePage extends React.Component {
   render() {
     return (
@@ -403,9 +401,9 @@ class HomePage extends React.Component {
                   Ist die Teilnahme kostenlos?
                 </p>
                 <p>
-                  <strong>Ja.</strong> Der Service der Plattform und angebotenen Leistungen
-                  werden auf Basis einer Provision von 15% pro verkauften
-                  Gutschein gedeckt.
+                  <strong>Ja.</strong> Der Service der Plattform und angebotenen
+                  Leistungen werden auf Basis einer Provision von 15% pro
+                  verkauften Gutschein gedeckt.
                 </p>
               </MDBCol>
               <MDBCol md="6">
@@ -431,10 +429,13 @@ class HomePage extends React.Component {
     );
   }
 }
+//#endregion
 
+//#region > Exports
 export default withRouter(HomePage);
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

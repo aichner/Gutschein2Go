@@ -1,3 +1,4 @@
+//#region > Imports
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
@@ -44,7 +45,9 @@ import { reduxFirestore, getFirestore } from "redux-firestore";
 import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
 // Firebase config
 import fbInit from "./config/fbInit";
+//#endregion
 
+//#region > Functions
 /**
  * Create Redux data-store and store it in store
  * Apply thunk middle ware
@@ -55,14 +58,14 @@ const store = createStore(
     applyMiddleware(
       thunk.withExtraArgument({
         getFirebase, // Firebase
-        getFirestore // Cloud DB
+        getFirestore, // Cloud DB
       })
     ),
     reduxFirestore(fbInit),
     reactReduxFirebase(fbInit, {
       useFirestoreForProfile: true, // Sync user data to user profile
       userProfile: "partners", // Tell Redux Firebase where our users are stored
-      attachAuthIsReady: true // Enable firebase initializing before DOM rendering
+      attachAuthIsReady: true, // Enable firebase initializing before DOM rendering
     })
   )
 );
@@ -78,8 +81,9 @@ store.firebaseAuthIsReady.then(() => {
   );
   registerServiceWorker();
 });
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

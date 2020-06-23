@@ -1,22 +1,19 @@
+//#region > Imports
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
 // DOM bindings for React Router
 import { BrowserRouter as Router } from "react-router-dom";
+//#endregion
 
+//#region > Components
 //> Components
 /**
  * Footer: Global Footer
  * Navbar: Global navigation bar
  */
-import {
-  Footer,
-  Navbar,
-  CookieModal,
-} from "./components/molecules";
-import {
-  ScrollToTop
-} from "./components/atoms";
+import { Footer, Navbar, CookieModal } from "./components/molecules";
+import { ScrollToTop } from "./components/atoms";
 // Routes
 import Routes from "./Routes";
 
@@ -38,10 +35,13 @@ class App extends React.Component {
     );
   }
 }
+//#endregion
 
+//#region > Exports
 export default App;
+//#endregion
 
-/** 
+/**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

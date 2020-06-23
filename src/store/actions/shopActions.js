@@ -1,6 +1,7 @@
 export const checkName = (name) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     console.log(name);
+
     const firebase = getFirebase();
     const firestore = getFirestore();
 
@@ -10,9 +11,11 @@ export const checkName = (name) => {
       .then((querySnapshot) => {
         let result = undefined;
         let found = false;
+
         querySnapshot.forEach(function (doc) {
           // doc.data() is never undefined for query doc snapshots
           result = doc.data();
+
           if (result) {
             if (result.shop.name === name.toLowerCase()) {
               found = true;
@@ -46,6 +49,7 @@ export const getUsers = () => {
         let users = querySnapshot.docs.map((doc) => {
           let data = doc.data();
           data.uid = doc.id;
+
           return data;
         });
         console.log("Users", users);
@@ -85,6 +89,7 @@ export const verifyUser = (uid) => {
             let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
               data.uid = doc.id;
+
               return data;
             });
             dispatch({
@@ -139,6 +144,7 @@ export const configVouchers = (
             let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
               data.uid = doc.id;
+
               return data;
             });
             dispatch({
@@ -183,6 +189,7 @@ export const activateShop = (uid) => {
             let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
               data.uid = doc.id;
+
               return data;
             });
             dispatch({
@@ -227,6 +234,7 @@ export const closeShop = (uid) => {
             let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
               data.uid = doc.id;
+
               return data;
             });
             dispatch({
@@ -269,6 +277,7 @@ export const banUser = (uid) => {
             let users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
               data.uid = doc.id;
+
               return data;
             });
             dispatch({
@@ -291,5 +300,5 @@ export const banUser = (uid) => {
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

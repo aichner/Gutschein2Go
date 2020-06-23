@@ -10,16 +10,16 @@ const shopReducer = (state = initState, action) => {
       console.log("Shop not found", action.err);
       return {
         ...state,
-        shopError: true
+        shopError: true,
       };
     case "SHOP_FOUND":
       console.log("Shop found");
       return {
         ...state,
-        shopError: false
+        shopError: false,
       };
     case "GETUSERS_ERROR":
-      console.log("Could not get users.",action.err);
+      console.log("Could not get users.", action.err);
       return {
         ...state,
         shopError: true,
@@ -30,7 +30,7 @@ const shopReducer = (state = initState, action) => {
       return {
         ...state,
         shopError: false,
-        users: action.users
+        users: action.users,
       };
     case "BAN_SUCCESS":
       console.log("Banned user.");
@@ -43,7 +43,7 @@ const shopReducer = (state = initState, action) => {
       return {
         ...state,
         shopError: true,
-        users: action.err
+        users: action.err,
       };
     default:
       return state;
@@ -54,5 +54,5 @@ export default shopReducer;
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

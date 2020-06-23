@@ -1,3 +1,4 @@
+//#region > Imports
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
@@ -46,10 +47,6 @@ import {
   MDBAlert,
   MDBSpinner,
 } from "mdbreact";
-import { Radar } from "react-chartjs-2";
-
-//> Components
-import { Coach, Customer, FormCat } from "../../organisms";
 
 //> CSS
 // Profile page
@@ -59,10 +56,13 @@ import "./managepage.scss";
 import { ReactComponent as MorningImg } from "../../../assets/icons/morning.svg";
 import { ReactComponent as DayImg } from "../../../assets/icons/day.svg";
 import { ReactComponent as NightImg } from "../../../assets/icons/night.svg";
+//#endregion
 
+//#region > Components
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       page: null,
       fetchFor: undefined,
@@ -629,9 +629,9 @@ class ProfilePage extends React.Component {
                               : this.state.voucherConfigModal.shopType
                           );
                         } else {
-                        this.setState({
-                          voucherConfigModalError:
-                            "Please select at least one type of vouchers.",
+                          this.setState({
+                            voucherConfigModalError:
+                              "Please select at least one type of vouchers.",
                           });
                         }
                       } else {
@@ -666,7 +666,9 @@ class ProfilePage extends React.Component {
     }
   }
 }
+//#endregion
 
+//#region > Functions
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
@@ -689,13 +691,16 @@ const mapDispatchToProps = (dispatch) => {
       ),
   };
 };
+//#endregion
 
+//#region > Exports
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(ProfilePage));
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

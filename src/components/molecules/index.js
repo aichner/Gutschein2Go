@@ -4,13 +4,9 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import CookieModal from "./CookieModal";
 
-export {
-    Footer,
-    Navbar,
-    CookieModal,
-};
+export { Footer, Navbar, CookieModal };
 
-/** 
+/**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

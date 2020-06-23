@@ -9,9 +9,9 @@
   }
   input {
     margin-bottom: 1rem;
-    &.error{
+    &.error {
       border-color: #ff8080;
-      box-shadow: 0 0 0 0.2rem rgba(255,0,0,.25);
+      box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
     }
   }
   .form-check-input[type="checkbox"].filled-in:checked + label:after,
@@ -63,7 +63,7 @@
   }
 }
 
-/** 
+/**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */
