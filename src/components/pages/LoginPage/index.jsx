@@ -55,12 +55,12 @@ class LoginPage extends React.Component {
   _loginUser = () => {
     this.setState({ loading: true }, () => {
       let email = this.state.email;
-      let psw = this.state.password;
+      let pw = this.state.password;
 
-      if (email && psw) {
+      if (email && pw) {
         this.props.signIn({
           email: email,
-          password: psw,
+          password: pw,
         });
       } else {
         this.setState({
