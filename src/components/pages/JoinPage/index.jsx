@@ -451,7 +451,7 @@ class JoinPage extends React.Component {
                               </MDBCol>
                               <MDBCol md="12" className="mt-2">
                                 <MDBBtn
-                                  color="orange"
+                                  color="blue"
                                   size="lg"
                                   type="submit"
                                   disabled={
@@ -564,7 +564,7 @@ class JoinPage extends React.Component {
                               </MDBCol>
                               <MDBCol md="12" className="mt-2">
                                 <MDBBtn
-                                  color="orange"
+                                  color="blue"
                                   size="lg"
                                   type="submit"
                                   disabled={this.state.email === ""}
@@ -630,7 +630,7 @@ class JoinPage extends React.Component {
                               </MDBCol>
                               <MDBCol md="12" className="mt-2">
                                 <MDBBtn
-                                  color="orange"
+                                  color="blue"
                                   size="lg"
                                   outline
                                   type="submit"
@@ -644,7 +644,7 @@ class JoinPage extends React.Component {
                                   Überspringen
                                 </MDBBtn>
                                 <MDBBtn
-                                  color="orange"
+                                  color="blue"
                                   size="lg"
                                   type="submit"
                                   disabled={
@@ -782,7 +782,7 @@ class JoinPage extends React.Component {
                               </div>
                               <MDBCol md="12" className="mt-2">
                                 <MDBBtn
-                                  color="orange"
+                                  color="blue"
                                   size="lg"
                                   type="submit"
                                   disabled={

@@ -131,7 +131,7 @@ class HomePage extends React.Component {
                         <strong>individuellen Online-Gutschein Service</strong>.
                       </p>
                       <Link to="join">
-                        <MDBBtn color="orange" size="lg">
+                        <MDBBtn color="blue" size="lg">
                           Partner werden
                         </MDBBtn>
                       </Link>
@@ -172,7 +172,7 @@ class HomePage extends React.Component {
                   <strong>kostenlos</strong> bei.
                 </p>
                 <Link to="join">
-                  <MDBBtn color="orange" size="lg" className="my-3">
+                  <MDBBtn color="blue" size="lg" className="my-3">
                     Partner werden
                   </MDBBtn>
                 </Link>

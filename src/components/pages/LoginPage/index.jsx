@@ -140,7 +140,7 @@ class LoginPage extends React.Component {
               />
             </MDBCol>
           </MDBRow>
-          <MDBBtn color="orange" type="submit" disabled={this.state.loading}>
+          <MDBBtn color="blue" type="submit" disabled={this.state.loading}>
             {!this.state.loading ? (
               <MDBIcon icon="angle-right" />
             ) : (

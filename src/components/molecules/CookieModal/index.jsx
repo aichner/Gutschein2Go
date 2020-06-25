@@ -50,7 +50,7 @@ class ModalPage extends Component {
               Wir verwenden Cookies, um die Funktionsfähigkeit der Website
               aufrecht zu erhalten.
             </p>
-            <MDBBtn color="orange" onClick={this.toggle(1)}>
+            <MDBBtn color="blue" onClick={this.toggle(1)}>
               Ok, danke
             </MDBBtn>
           </MDBRow>

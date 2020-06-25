@@ -50,7 +50,7 @@ class ShopPage extends React.Component {
             Dieser Partner ist noch nicht verifiziert.
           </p>
           <Link to="../">
-            <MDBBtn color="orange" size="lg">
+            <MDBBtn color="blue" size="lg">
               Zurück zur Startseite
             </MDBBtn>
           </Link>
@@ -75,7 +75,7 @@ class ShopPage extends React.Component {
           </h2>
           <p className="lead mb-5">Haben Sie sich vertippt?</p>
           <Link to="../join">
-            <MDBBtn color="orange" size="lg">
+            <MDBBtn color="blue" size="lg">
               Partner werden
             </MDBBtn>
           </Link>

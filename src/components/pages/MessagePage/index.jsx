@@ -54,7 +54,7 @@ class MessagePage extends React.Component {
               <br />
               9523 Villach-Landskron
               <br />
-              <MDBBtn color="orange" href="mailto:info@gutschein2go.at">
+              <MDBBtn color="blue" href="mailto:info@gutschein2go.at">
                 <MDBIcon far icon="envelope" />
                 Kontakt
               </MDBBtn>
@@ -761,7 +761,7 @@ class MessagePage extends React.Component {
               <br />
               9523 Villach-Landskron
               <br />
-              <MDBBtn color="orange" href="mailto:priavcy@gutschein2go.at">
+              <MDBBtn color="blue" href="mailto:priavcy@gutschein2go.at">
                 <MDBIcon far icon="envelope" />
                 Kontakt
               </MDBBtn>

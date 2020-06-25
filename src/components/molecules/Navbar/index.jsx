@@ -92,13 +92,13 @@ class Navbar extends React.Component {
                       <>
                         {profile.admin ? (
                           <MDBNavLink exact to="manage">
-                            <MDBBtn size="lg" color="orange">
+                            <MDBBtn size="lg" color="blue">
                               Management
                             </MDBBtn>
                           </MDBNavLink>
                         ) : (
                           <MDBNavLink exact to="join">
-                            <MDBBtn size="lg" color="orange">
+                            <MDBBtn size="lg" color="blue">
                               Mein Status
                             </MDBBtn>
                           </MDBNavLink>
@@ -106,7 +106,7 @@ class Navbar extends React.Component {
                       </>
                     ) : (
                       <MDBNavLink exact to="join">
-                        <MDBBtn size="lg" color="orange">
+                        <MDBBtn size="lg" color="blue">
                           Join
                         </MDBBtn>
                       </MDBNavLink>
