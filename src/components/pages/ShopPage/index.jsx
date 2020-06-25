@@ -1,3 +1,4 @@
+//#region > Imports
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
@@ -6,49 +7,48 @@ import { withRouter, Link, Redirect } from "react-router-dom";
 
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
-import {
-  MDBContainer,
-  MDBBtn,
-  MDBAlert,
-  MDBIcon,
-} from "mdbreact";
+import { MDBContainer, MDBBtn, MDBAlert, MDBIcon } from "mdbreact";
 
 //> Redux
 // Connect
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // Actions
-import { signInAnonymous } from '../../../store/actions/authActions';
-import { checkName } from '../../../store/actions/shopActions';
+import { signInAnonymous } from "../../../store/actions/authActions";
+import { checkName } from "../../../store/actions/shopActions";
 
 //> CSS
 import "./shoppage.scss";
+//#endregion
 
+//#region > Components
 class ShopPage extends React.Component {
   state = {
-    status: true
+    status: true,
   };
 
   componentDidMount = () => {
     const { match } = this.props;
 
-    if(match.params.username){
+    if (match.params.username) {
       // Parameter is given
-      let name = match.params.username;
+      const name = match.params.username;
       this.props.checkName(name);
     }
-  }
-  
+  };
+
   render() {
     const { shopError, match } = this.props;
+
     console.log(shopError);
-    if(shopError === false){
+
+    if (shopError === false) {
       return (
         <MDBContainer id="message" className="py-5 my-5 text-center">
           <MDBIcon icon="clock" className="orange-text mb-3" size="3x" />
-          <h2>
-          Verifizierung ausstehend
-          </h2>
-          <p className="lead mb-5">Die Echtheit dieses Partners ist noch nicht verifiziert.</p>
+          <h2>Verifizierung ausstehend</h2>
+          <p className="lead mb-5">
+            Dieser Partner ist noch nicht verifiziert.
+          </p>
           <Link to="../">
             <MDBBtn color="orange" size="lg">
               Zurück zur Startseite
@@ -56,14 +56,22 @@ class ShopPage extends React.Component {
           </Link>
         </MDBContainer>
       );
-    } else if(shopError === true) {
+    } else if (shopError === true) {
       // Shop not found
       return (
         <MDBContainer id="message" className="py-5 my-5 text-center">
-          <MDBIcon icon="exclamation-triangle" className="orange-text mb-3" size="3x" />
+          <MDBIcon
+            icon="exclamation-triangle"
+            className="orange-text mb-3"
+            size="3x"
+          />
           <h2>
-          Der Partner <strong className="orange-text">{match.params && match.params.username}</strong> existiert nicht.
-          <MDBIcon icon="warning" className="danger-text ml-2"/>
+            Der Partner{" "}
+            <strong className="orange-text">
+              {match.params && match.params.username}
+            </strong>{" "}
+            existiert nicht.
+            <MDBIcon icon="warning" className="danger-text ml-2" />
           </h2>
           <p className="lead mb-5">Haben Sie sich vertippt?</p>
           <Link to="../join">
@@ -84,24 +92,32 @@ class ShopPage extends React.Component {
     }
   }
 }
+//#endregion
 
+//#region > Functions
 const mapStateToProps = (state) => {
   return {
     shopError: state.shop.shopError,
-    auth: state.firebase.auth
-  }
-}
+    auth: state.firebase.auth,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     signInAnonymous: () => dispatch(signInAnonymous()),
-    checkName: (name) => dispatch(checkName(name))
-  }
-}
+    checkName: (name) => dispatch(checkName(name)),
+  };
+};
+//#endregion
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(ShopPage));
+//#region > Exports
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ShopPage));
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

@@ -20,35 +20,37 @@
   }
 }
 
-#info, #calltoaction, #support{
+#info,
+#calltoaction,
+#support {
   background: #ff8910;
 }
 
-#service{
-  svg{
+#service {
+  svg {
     max-width: 100%;
     max-height: 200px;
   }
-  .lead{
+  .lead {
     border-bottom: 4px #ff8910 solid;
     display: inline-block;
     font-size: 1.6rem;
-    span{
+    span {
       color: #ff8910;
-      margin-right: .3rem;
+      margin-right: 0.3rem;
       font-size: 2rem;
     }
   }
 }
 
-#faq{
-  .lead{
+#faq {
+  .lead {
     border-bottom: 4px #ff8910 solid;
     display: inline-block;
   }
 }
 
-/** 
+/**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

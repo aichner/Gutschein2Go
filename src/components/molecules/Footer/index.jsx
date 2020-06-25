@@ -1,3 +1,4 @@
+//#region > Imports
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
@@ -13,7 +14,9 @@ import "./footer.scss";
 
 //> Images
 import logoImg from "../../../assets/content/h50_white.png";
+//#endregion
 
+//#region > Components
 class Footer extends React.Component {
   state = {
     pathBack: "",
@@ -23,12 +26,13 @@ class Footer extends React.Component {
     if (this.props.location) {
       let i = 1;
       let pathBack = "";
+
       // Check the number of slashes to fix relative links
       while (i < this.props.location.pathname.split("/").length - 1) {
         pathBack += "../";
         i++;
       }
-      console.log(pathBack);
+
       this.setState({
         pathBack,
       });
@@ -120,10 +124,13 @@ class Footer extends React.Component {
     );
   }
 }
+//#endregion
 
+//#region > Exports
 export default Footer;
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

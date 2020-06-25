@@ -1,3 +1,4 @@
+//#region > Imports
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
@@ -16,7 +17,7 @@ import {
   MDBNavLink,
   MDBContainer,
   MDBBtn,
-  MDBIcon
+  MDBIcon,
 } from "mdbreact";
 
 //> Redux
@@ -30,18 +31,20 @@ import "./navbar.scss";
 
 // React Logo
 import logoImg from "../../../assets/content/h60.png";
+//#endregion
 
+//#region > Components
 class Navbar extends React.Component {
   state = {
-    collapseID: ""
+    collapseID: "",
   };
 
-  toggleCollapse = collapseID => () =>
-    this.setState(prevState => ({
-      collapseID: prevState.collapseID !== collapseID ? collapseID : ""
+  toggleCollapse = (collapseID) => () =>
+    this.setState((prevState) => ({
+      collapseID: prevState.collapseID !== collapseID ? collapseID : "",
     }));
 
-  closeCollapse = collapseID => () => {
+  closeCollapse = (collapseID) => () => {
     window.scrollTo(0, 0);
     this.state.collapseID === collapseID && this.setState({ collapseID: "" });
   };
@@ -58,7 +61,7 @@ class Navbar extends React.Component {
     const { collapseID } = this.state;
     const { auth, profile, location } = this.props;
 
-    if(location && location.pathname !== "/manage"){
+    if (location && location.pathname !== "/manage") {
       return (
         <div>
           <MDBNavbar color="white" light expand="md" fixed="top" scrolling>
@@ -88,19 +91,13 @@ class Navbar extends React.Component {
                     {auth.uid ? (
                       <>
                         {profile.admin ? (
-                          <MDBNavLink
-                            exact
-                            to="manage"
-                          >
+                          <MDBNavLink exact to="manage">
                             <MDBBtn size="lg" color="orange">
                               Management
                             </MDBBtn>
                           </MDBNavLink>
                         ) : (
-                          <MDBNavLink
-                            exact
-                            to="join"
-                          >
+                          <MDBNavLink exact to="join">
                             <MDBBtn size="lg" color="orange">
                               Mein Status
                             </MDBBtn>
@@ -108,10 +105,7 @@ class Navbar extends React.Component {
                         )}
                       </>
                     ) : (
-                      <MDBNavLink
-                        exact
-                        to="join"
-                      >
+                      <MDBNavLink exact to="join">
                         <MDBBtn size="lg" color="orange">
                           Join
                         </MDBBtn>
@@ -133,10 +127,7 @@ class Navbar extends React.Component {
                   )}
                   {!auth.uid && (
                     <MDBNavItem>
-                      <MDBNavLink
-                        exact
-                        to="login"
-                      >
+                      <MDBNavLink exact to="login">
                         <MDBBtn size="lg" outline color="elegant">
                           Login
                         </MDBBtn>
@@ -155,23 +146,28 @@ class Navbar extends React.Component {
     }
   }
 }
+//#endregion
 
-const mapStateToProps = state => {
+//#region > Functions
+const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
-    profile: state.firebase.profile
+    profile: state.firebase.profile,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    signOut: () => dispatch(signOut())
+    signOut: () => dispatch(signOut()),
   };
 };
+//#endregion
 
+//#region > Exports
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar));
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

@@ -1,3 +1,4 @@
+//#region > Imports
 //> React
 // Contains all the functionality necessary to define React components
 import React from "react";
@@ -17,9 +18,8 @@ import {
   MDBRow,
   MDBCol,
   MDBAlert,
-  MDBInput,
   MDBBtn,
-  MDBIcon
+  MDBIcon,
 } from "mdbreact";
 
 //> Components
@@ -30,7 +30,9 @@ import "./loginpage.scss";
 
 //> Images
 import IMGlogo from "../../../assets/content/partners.jpg";
+//#endregion
 
+//#region > Components
 class LoginPage extends React.Component {
   state = {
     email: "",
@@ -38,31 +40,27 @@ class LoginPage extends React.Component {
     loading: false,
   };
 
-  componentDidMount = () => {
-    
-  };
-
-  submitHandler = event => {
+  submitHandler = (event) => {
     event.preventDefault();
 
     this._loginUser();
   };
 
-  changeHandler = event => {
+  changeHandler = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
   _loginUser = () => {
-    this.setState({loading: true}, () => {
-      let email = this.state.email;
-      let psw = this.state.password;
+    this.setState({ loading: true }, () => {
+      const email = this.state.email;
+      const pw = this.state.password;
 
-      if (email && psw) {
+      if (email && pw) {
         this.props.signIn({
           email: email,
-          password: psw
+          password: pw,
         });
       } else {
         this.setState({
@@ -70,15 +68,16 @@ class LoginPage extends React.Component {
           loading: false,
         });
       }
-    })
+    });
   };
 
   render() {
     const { authErrorDetails, auth, location } = this.props;
 
-    let params = location.search.substr(1)
+    const params = location.search.substr(1)
       ? location.search.substr(1).split("=")
       : null;
+
     if (params) {
       if (params[0] === "refer") {
         switch (params[1]) {
@@ -93,8 +92,8 @@ class LoginPage extends React.Component {
       if (auth.uid !== undefined) return <Redirect to="/manage" />;
     }
 
-    if(authErrorDetails){
-      if(this.state.loading === true){
+    if (authErrorDetails) {
+      if (this.state.loading === true) {
         this.setState({
           loading: false,
         });
@@ -154,26 +153,31 @@ class LoginPage extends React.Component {
     );
   }
 }
+//#endregion
 
-const mapStateToProps = state => {
+//#region > Functions
+const mapStateToProps = (state) => {
   return {
     authErrorDetails: state.auth.authErrorDetails,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    signIn: credentials => dispatch(signIn(credentials)),
+    signIn: (credentials) => dispatch(signIn(credentials)),
   };
 };
+//#endregion
 
+//#region > Exports
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(LoginPage));
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */

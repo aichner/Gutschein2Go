@@ -7,16 +7,9 @@ import ShopPage from "./ShopPage";
 import ManagePage from "./ManagePage";
 import LoginPage from "./LoginPage";
 
-export {
-    HomePage,
-    MessagePage,
-    JoinPage,
-    ShopPage,
-    ManagePage,
-    LoginPage,
-};
+export { HomePage, MessagePage, JoinPage, ShopPage, ManagePage, LoginPage };
 
-/** 
+/**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2020 Werbeagentur Christian Aichner
  */
