@@ -32,13 +32,16 @@ import { ReactComponent as VaultImg } from "../../../assets/content/svg/vault.sv
 import { ReactComponent as PartyImg } from "../../../assets/content/svg/party.svg";
 //#endregion
 
-//#region > Initialization
-const backgroundPictures = [baristaBg, breadBg, shopBg];
-
+//#region > Functions
+// Get random Int from the background pictures array
 function getRandomInt() {
   return Math.floor(Math.random() * Math.floor(backgroundPictures.length));
 }
+//#endregion
 
+//#region > Constant Variables
+// Load images
+const backgroundPictures = [baristaBg, breadBg, shopBg];
 // Get randomized image
 const randomBG = backgroundPictures[getRandomInt()];
 //#endregion
