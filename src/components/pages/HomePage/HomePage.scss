@@ -10,43 +10,42 @@
     line-height: 1.7;
   }
 
-  .form-check {
-    margin-bottom: 0 !important;
-  }
-
   .rgba-black-light,
   .rgba-black-light:after {
     background-color: rgba(0, 0, 0, 0.5);
   }
-}
 
-#info,
-#calltoaction,
-#support {
-  background: #ff8910;
-}
-
-#service {
-  svg {
-    max-width: 100%;
-    max-height: 200px;
-  }
-  .lead {
-    border-bottom: 4px #ff8910 solid;
-    display: inline-block;
-    font-size: 1.6rem;
-    span {
-      color: #ff8910;
-      margin-right: 0.3rem;
-      font-size: 2rem;
+  .voucher-preview {
+    .card {
+      margin-bottom: 2rem;
+      border-radius: 2rem;
+      overflow: hidden;
+      .card-body {
+        padding: 0;
+        display: flex;
+        .img-left {
+          width: 100px;
+          display: inline-block;
+          overflow: hidden;
+          // Custom background
+          &.img-geburtstag {
+            background-image: url("https://as1.ftcdn.net/jpg/02/65/97/62/500_F_265976223_YyKJ7YDyG83V7lOEP5VzpWkk8ICuPRTo.jpg");
+            background-position: center;
+          }
+          &.img-weihnachten {
+            background-image: url("https://as1.ftcdn.net/jpg/02/82/79/44/500_F_282794482_mzkLLhlkuKOmZ2nEdd21R73k33cxBjjo.jpg");
+            background-position: 35%;
+          }
+          &.img-valentienstag {
+            background-image: url("https://as2.ftcdn.net/jpg/03/16/56/59/500_F_316565954_Y6AkvKiocOSAwB2OtPiJkl4nBfHxDTlc.jpg");
+            background-position: 50%;
+          }
+        }
+        .content-right {
+          display: inline-block;
+        }
+      }
     }
-  }
-}
-
-#faq {
-  .lead {
-    border-bottom: 4px #ff8910 solid;
-    display: inline-block;
   }
 }
 
