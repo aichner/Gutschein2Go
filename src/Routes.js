@@ -16,6 +16,7 @@ import {
   ShopPage,
   ManagePage,
   LoginPage,
+  SelectPage,
 } from "./components/pages";
 //#endregion
 
@@ -25,6 +26,11 @@ class Routes extends React.Component {
     return (
       <Switch>
         <Route exact path="/" render={() => <HomePage />} />
+        <Route
+          exact
+          path="/select"
+          render={(props) => <SelectPage {...props} />}
+        />
         <Route
           exact
           path="/manage"

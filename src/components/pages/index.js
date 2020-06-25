@@ -6,8 +6,17 @@ import JoinPage from "./JoinPage";
 import ShopPage from "./ShopPage";
 import ManagePage from "./ManagePage";
 import LoginPage from "./LoginPage";
+import SelectPage from "./SelectPage";
 
-export { HomePage, MessagePage, JoinPage, ShopPage, ManagePage, LoginPage };
+export {
+  HomePage,
+  MessagePage,
+  JoinPage,
+  ShopPage,
+  ManagePage,
+  LoginPage,
+  SelectPage,
+};
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
