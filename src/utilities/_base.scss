@@ -93,6 +93,9 @@
   &:focus {
     box-shadow: none;
   }
+  &.btn-blue {
+    background: $darkblue !important;
+  }
 }
 
 // Scrollbar
