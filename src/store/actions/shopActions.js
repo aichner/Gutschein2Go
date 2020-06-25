@@ -46,7 +46,7 @@ export const getUsers = () => {
       .collection("partners")
       .get()
       .then((querySnapshot) => {
-        let users = querySnapshot.docs.map((doc) => {
+        const users = querySnapshot.docs.map((doc) => {
           let data = doc.data();
 
           data.uid = doc.id;
@@ -87,7 +87,7 @@ export const verifyUser = (uid) => {
           .collection("partners")
           .get()
           .then((querySnapshot) => {
-            let users = querySnapshot.docs.map((doc) => {
+            const users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
 
               data.uid = doc.id;
@@ -143,7 +143,7 @@ export const configVouchers = (
           .collection("partners")
           .get()
           .then((querySnapshot) => {
-            let users = querySnapshot.docs.map((doc) => {
+            const users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
 
               data.uid = doc.id;
@@ -189,7 +189,7 @@ export const activateShop = (uid) => {
           .collection("partners")
           .get()
           .then((querySnapshot) => {
-            let users = querySnapshot.docs.map((doc) => {
+            const users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
 
               data.uid = doc.id;
@@ -235,7 +235,7 @@ export const closeShop = (uid) => {
           .collection("partners")
           .get()
           .then((querySnapshot) => {
-            let users = querySnapshot.docs.map((doc) => {
+            const users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
 
               data.uid = doc.id;
@@ -279,7 +279,7 @@ export const banUser = (uid) => {
           .collection("partners")
           .get()
           .then((querySnapshot) => {
-            let users = querySnapshot.docs.map((doc) => {
+            const users = querySnapshot.docs.map((doc) => {
               let data = doc.data();
 
               data.uid = doc.id;

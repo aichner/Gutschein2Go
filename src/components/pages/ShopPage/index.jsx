@@ -31,7 +31,7 @@ class ShopPage extends React.Component {
 
     if (match.params.username) {
       // Parameter is given
-      let name = match.params.username;
+      const name = match.params.username;
       this.props.checkName(name);
     }
   };
@@ -47,7 +47,7 @@ class ShopPage extends React.Component {
           <MDBIcon icon="clock" className="orange-text mb-3" size="3x" />
           <h2>Verifizierung ausstehend</h2>
           <p className="lead mb-5">
-            Die Echtheit dieses Partners ist noch nicht verifiziert.
+            Dieser Partner ist noch nicht verifiziert.
           </p>
           <Link to="../">
             <MDBBtn color="orange" size="lg">

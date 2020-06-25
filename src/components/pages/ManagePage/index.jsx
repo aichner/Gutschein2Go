@@ -152,9 +152,9 @@ class ProfilePage extends React.Component {
 
   getGreetingTxt = () => {
     // Get date
-    let today = new Date();
+    const today = new Date();
     // Get current hours
-    let curHr = today.getHours();
+    const curHr = today.getHours();
 
     // Store selected greeting
     let selected = null;
@@ -172,9 +172,9 @@ class ProfilePage extends React.Component {
 
   getGreetingImg = () => {
     // Get date
-    let today = new Date();
+    const today = new Date();
     // Get current hours
-    let curHr = today.getHours();
+    const curHr = today.getHours();
 
     if (curHr < 11) {
       this.setState({ greetingImage: <MorningImg className="img-fluid" /> });

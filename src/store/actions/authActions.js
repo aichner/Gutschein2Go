@@ -84,12 +84,12 @@ export const signUp = (newUser) => {
     const sha256 = require("sha256");
 
     // Check if the user has entered a password. If not, create a password.
-    const psw = newUser.password
+    const pw = newUser.password
       ? newUser.password
       : sha256(Math.random().toString(36));
 
     // Create partner object
-    let partner = {
+    const partner = {
       first_name: newUser.first_name.trim(),
       last_name: newUser.last_name.trim(),
       email: newUser.email.trim(),
@@ -119,7 +119,7 @@ export const signUp = (newUser) => {
     // Create new user to firebase
     firebase
       .auth()
-      .createUserWithEmailAndPassword(newUser.email, psw)
+      .createUserWithEmailAndPassword(newUser.email, pw)
       .then((response) => {
         // Create data for user we just created
         return firestore

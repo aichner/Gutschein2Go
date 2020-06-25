@@ -22,7 +22,7 @@ class ModalPage extends Component {
   };
 
   toggle = (nr) => () => {
-    let modalNumber = "modal" + nr;
+    const modalNumber = "modal" + nr;
 
     this.setState(
       {

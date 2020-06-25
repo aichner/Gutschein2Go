@@ -32,7 +32,7 @@ import { ReactComponent as VaultImg } from "../../../assets/content/svg/vault.sv
 import { ReactComponent as PartyImg } from "../../../assets/content/svg/party.svg";
 //#endregion
 
-//#region > Functions
+//#region > Initialization
 const backgroundPictures = [baristaBg, breadBg, shopBg];
 
 function getRandomInt() {

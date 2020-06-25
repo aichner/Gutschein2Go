@@ -54,8 +54,8 @@ class LoginPage extends React.Component {
 
   _loginUser = () => {
     this.setState({ loading: true }, () => {
-      let email = this.state.email;
-      let pw = this.state.password;
+      const email = this.state.email;
+      const pw = this.state.password;
 
       if (email && pw) {
         this.props.signIn({
@@ -74,7 +74,7 @@ class LoginPage extends React.Component {
   render() {
     const { authErrorDetails, auth, location } = this.props;
 
-    let params = location.search.substr(1)
+    const params = location.search.substr(1)
       ? location.search.substr(1).split("=")
       : null;
 

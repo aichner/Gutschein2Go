@@ -67,7 +67,7 @@ class JoinPage extends React.Component {
   checkEmail = async (e) => {
     e.preventDefault();
 
-    let rtn = await this.props.checkEmail(this.state.email.trim());
+    const rtn = await this.props.checkEmail(this.state.email.trim());
 
     // If the email does not yet exist
     if (!rtn) {
@@ -801,7 +801,7 @@ class JoinPage extends React.Component {
                                       !this.state.privacy ||
                                       !this.state.agb
                                     ) {
-                                      let newUser = {
+                                      const newUser = {
                                         first_name: this.state.firstname,
                                         last_name: this.state.lastname,
                                         email: this.state.email,
