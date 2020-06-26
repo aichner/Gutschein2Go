@@ -9,7 +9,7 @@
   transition: fill 0.2s ease;
   cursor: pointer;
   &:hover {
-    fill: $darkblue;
+    fill: transparentize($color: $darkblue, $amount: 0.5);
   }
   &.active {
     fill: $darkblue;
