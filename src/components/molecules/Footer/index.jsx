@@ -78,7 +78,7 @@ class Footer extends React.Component {
               <p className="my-2 font-weight-bold">
                 Made with
                 <i
-                  className="fas fa-heart pulse orange-text ml-1 mr-1"
+                  className="fas fa-heart pulse red-text ml-1 mr-1"
                   aria-hidden="true"
                 ></i>
                 by
