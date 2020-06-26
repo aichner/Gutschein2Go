@@ -1,8 +1,66 @@
 #selector {
-  margin-top: 10rem;
+  margin-top: 8rem;
   .mapcontainer {
-    max-width: 60%;
+    max-width: 45%;
     margin: auto;
+    h3 {
+      top: 0;
+      left: 0;
+    }
+  }
+  .container-fluid {
+    padding: 0;
+    .split-selector {
+      .row {
+        margin: 0;
+        padding: 0;
+        .col-lg-6 {
+          margin: 0;
+          padding: 0;
+          min-height: 500px;
+          overflow: hidden;
+          .view {
+            height: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: white;
+            user-select: none;
+            .stars {
+              i {
+                margin-right: 0.1rem;
+              }
+            }
+            &.rgba-blue-light {
+              background-color: rgba(33, 150, 243, 0.3);
+            }
+          }
+          &:first-child {
+            background-image: url("https://as1.ftcdn.net/jpg/02/94/19/40/500_F_294194023_disE35GtlVLDQx4caNDaWewZI8LbxWFQ.jpg");
+            background-size: cover;
+            border-right: 5px rgba(33, 150, 243, 0.4) solid;
+            &:hover {
+              border-right: 5px rgba(33, 150, 243, 0.6) solid;
+              .view {
+                transform: scale(1.2);
+                background-color: rgba(33, 150, 243, 0.4);
+              }
+            }
+          }
+          &:last-child {
+            background-image: url("https://as2.ftcdn.net/jpg/01/82/06/87/500_F_182068771_KLSuwtFAHVLGiwi54t2kCBtEjvCU9soK.jpg");
+            background-size: cover;
+            border-left: 5px rgba(233, 30, 99, 0.4) solid;
+            &:hover {
+              border-left: 5px rgba(233, 30, 99, 0.6) solid;
+              .view {
+                transform: scale(1.2);
+                background-color: rgba(233, 30, 99, 0.4);
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 

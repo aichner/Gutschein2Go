@@ -11,6 +11,9 @@
   &:hover {
     fill: $darkblue;
   }
+  &.active {
+    fill: $darkblue;
+  }
 }
 
 /**
