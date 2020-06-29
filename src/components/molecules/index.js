@@ -3,8 +3,9 @@
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import CookieModal from "./CookieModal";
+import TopPickCard from "./TopPickCard";
 
-export { Footer, Navbar, CookieModal };
+export { Footer, Navbar, CookieModal, TopPickCard };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

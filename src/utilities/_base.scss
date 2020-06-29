@@ -122,6 +122,18 @@
   cursor: pointer !important;
 }
 
+// Lazy loading loader
+.placeholder {
+  display: block;
+  height: 15px;
+  border-radius: 1rem;
+  width: 100%;
+  background: darken(grey, 10%) !important;
+  .indeterminate {
+    background: darken(grey, 8%);
+  }
+}
+
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
  * Copyright © 2020 Werbeagentur Christian Aichner
