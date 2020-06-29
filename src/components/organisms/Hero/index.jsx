@@ -209,7 +209,7 @@ class Hero extends Component {
                           </MDBBtn>
                           <MDBBtn size="md" color="blue" rounded>
                             <MDBIcon icon="signature" className="pr-2" />
-                            Persönlichen Gutschein erstellen
+                            Gutschein personalisieren
                           </MDBBtn>
                         </div>
                       </MDBCardBody>

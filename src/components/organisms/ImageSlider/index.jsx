@@ -32,56 +32,54 @@ class ImageSlider extends Component {
   render() {
     return (
       <div id="imageslider">
-        <MDBContainer>
-          <MDBCarousel
-            activeItem={1}
-            length={3}
-            showControls={false}
-            showIndicators={false}
-            className="z-depth-1"
-            slide
-          >
-            <MDBCarouselInner>
-              <MDBCarouselItem itemId="1">
-                <MDBView>
-                  <img className="d-block w-100" src={hotelPic} alt="Hotels" />
-                  <MDBMask overlay="blue-light" />
-                </MDBView>
-                <MDBCarouselCaption>
-                  <h2 className="h3-responsive">Hotels</h2>
-                </MDBCarouselCaption>
-              </MDBCarouselItem>
-              <MDBCarouselItem itemId="2">
-                <MDBView>
-                  <img
-                    className="d-block w-100"
-                    src={restaurantPic}
-                    alt="Restaurants"
-                  />
-                  <MDBMask overlay="blue-light" />
-                </MDBView>
-                <MDBCarouselCaption>
-                  <h2 className="h3-responsive">Restaurants</h2>
-                </MDBCarouselCaption>
-              </MDBCarouselItem>
-              <MDBCarouselItem itemId="3">
-                <MDBView>
-                  <img className="d-block w-100" src={cafePic} alt="Cafés" />
-                  <MDBMask overlay="blue-light" />
-                </MDBView>
-                <MDBCarouselCaption>
-                  <h2 className="h3-responsive">Cafés</h2>
-                </MDBCarouselCaption>
-              </MDBCarouselItem>
-            </MDBCarouselInner>
-          </MDBCarousel>
-          <div className="toppicks">
-            <MDBBtn size="md" color="blue" rounded>
-              Our Top Picks
-            </MDBBtn>
-            <MDBIcon icon="angle-down" />
-          </div>
-        </MDBContainer>
+        <MDBCarousel
+          activeItem={1}
+          length={3}
+          showControls={false}
+          showIndicators={false}
+          className="z-depth-1"
+          slide
+        >
+          <MDBCarouselInner>
+            <MDBCarouselItem itemId="1">
+              <MDBView>
+                <img className="d-block w-100" src={hotelPic} alt="Hotels" />
+                <MDBMask overlay="blue-light" />
+              </MDBView>
+              <MDBCarouselCaption>
+                <h2 className="h3-responsive">Hotels</h2>
+              </MDBCarouselCaption>
+            </MDBCarouselItem>
+            <MDBCarouselItem itemId="2">
+              <MDBView>
+                <img
+                  className="d-block w-100"
+                  src={restaurantPic}
+                  alt="Restaurants"
+                />
+                <MDBMask overlay="blue-light" />
+              </MDBView>
+              <MDBCarouselCaption>
+                <h2 className="h3-responsive">Restaurants</h2>
+              </MDBCarouselCaption>
+            </MDBCarouselItem>
+            <MDBCarouselItem itemId="3">
+              <MDBView>
+                <img className="d-block w-100" src={cafePic} alt="Cafés" />
+                <MDBMask overlay="blue-light" />
+              </MDBView>
+              <MDBCarouselCaption>
+                <h2 className="h3-responsive">Cafés</h2>
+              </MDBCarouselCaption>
+            </MDBCarouselItem>
+          </MDBCarouselInner>
+        </MDBCarousel>
+        <div className="toppicks">
+          <MDBBtn size="md" color="blue" rounded>
+            Our Top Picks
+          </MDBBtn>
+          <MDBIcon icon="angle-down" />
+        </div>
       </div>
     );
   }

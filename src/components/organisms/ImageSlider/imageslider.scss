@@ -1,6 +1,9 @@
 #imageslider {
-  .carousel-caption {
-    align-items: center;
+  .carousel {
+    .carousel-caption {
+      align-items: center;
+    }
+    height: 400px;
   }
 }
 
